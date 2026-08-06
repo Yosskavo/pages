@@ -8,24 +8,21 @@ PROJECTS_JSON = os.path.join(PROJECT_ROOT, 'data', 'projects.json')
 MARKDOWN_DIR = os.path.join(PROJECT_ROOT, 'markdown')
 INDEX_JSON = os.path.join(PROJECT_ROOT, 'data', 'markdown_index.json')
 
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
-CODEBERG_USER = "Yosskavo"
 GITHUB_USER = "Yosskavo"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") or os.getenv("GH_TOKEN")
 
-def get_github_headers():
+def get_headers():
     headers = {'User-Agent': 'Mozilla/5.0'}
     if GITHUB_TOKEN:
         headers['Authorization'] = f"token {GITHUB_TOKEN}"
     return headers
 
-def discover_user_repos():
+def discover_github_repos():
     discovered = []
-    seen_urls = set()
+    url = f"https://api.github.com/users/{GITHUB_USER}/repos?per_page=100"
+    req = urllib.request.Request(url, headers=get_headers())
 
-    # 1. Discover Codeberg Repositories
     try:
-        cb_url = f"https://codeberg.org/api/v1/users/{CODEBERG_USER}/repos?limit=100"
-        req = urllib.request.Request(cb_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as resp:
             repos = json.loads(resp.read().decode('utf-8'))
             for r in repos:
@@ -33,43 +30,6 @@ def discover_user_repos():
                     continue
                 repo_name = r.get('name')
                 repo_url = r.get('html_url')
-                if repo_url in seen_urls:
-                    continue
-                seen_urls.add(repo_url)
-                
-                desc = r.get('description') or f"Project repository for {repo_name}."
-                created_at = (r.get('created_at') or '')[:10]
-                updated_at = (r.get('updated_at') or '')[:10]
-                lang = r.get('language') or ''
-
-                discovered.append({
-                    "id": repo_name.lower(),
-                    "title": repo_name,
-                    "repo_folder": repo_name,
-                    "description": desc,
-                    "tech": lang if lang else "Software Project",
-                    "github": repo_url,
-                    "created_at": created_at,
-                    "updated_at": updated_at,
-                    "language": lang
-                })
-    except Exception as e:
-        print(f"Could not fetch Codeberg repos: {e}")
-
-    # 2. Discover GitHub Repositories
-    try:
-        gh_url = f"https://api.github.com/users/{GITHUB_USER}/repos?per_page=100"
-        req = urllib.request.Request(gh_url, headers=get_github_headers())
-        with urllib.request.urlopen(req) as resp:
-            repos = json.loads(resp.read().decode('utf-8'))
-            for r in repos:
-                if r.get('private'):
-                    continue
-                repo_name = r.get('name')
-                repo_url = r.get('html_url')
-                if repo_url.lower() in [u.lower() for u in seen_urls]:
-                    continue
-                seen_urls.add(repo_url)
 
                 desc = r.get('description') or f"Project repository for {repo_name}."
                 created_at = (r.get('created_at') or '')[:10]
@@ -88,13 +48,13 @@ def discover_user_repos():
                     "language": lang
                 })
     except Exception as e:
-        print(f"Could not fetch GitHub repos: {e}")
+        print(f"Could not fetch GitHub repos for {GITHUB_USER}: {e}")
 
     return discovered
 
-def sync_github(owner, repo):
+def sync_github_repo(owner, repo):
     api_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/HEAD?recursive=1"
-    req = urllib.request.Request(api_url, headers=get_github_headers())
+    req = urllib.request.Request(api_url, headers=get_headers())
     md_files = {}
 
     with urllib.request.urlopen(req) as resp:
@@ -106,54 +66,28 @@ def sync_github(owner, repo):
             if item.get('type') == 'blob' and path.lower().endswith('.md'):
                 quoted_path = urllib.parse.quote(path)
                 raw_url = f"https://raw.githubusercontent.com/{owner}/{repo}/HEAD/{quoted_path}"
-                file_req = urllib.request.Request(raw_url, headers=get_github_headers())
+                file_req = urllib.request.Request(raw_url, headers=get_headers())
                 with urllib.request.urlopen(file_req) as f_resp:
                     content = f_resp.read().decode('utf-8')
                     md_files[path] = content
 
     return md_files
 
-def sync_codeberg(owner, repo):
-    md_files = {}
-    for branch in ['main', 'master', 'HEAD']:
-        api_url = f"https://codeberg.org/api/v1/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
-        req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
-        try:
-            with urllib.request.urlopen(req) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                tree = data.get('tree', [])
-
-                for item in tree:
-                    path = item.get('path', '')
-                    if item.get('type') == 'blob' and path.lower().endswith('.md'):
-                        quoted_path = urllib.parse.quote(path)
-                        raw_url = f"https://codeberg.org/{owner}/{repo}/raw/branch/{branch}/{quoted_path}"
-                        file_req = urllib.request.Request(raw_url, headers={'User-Agent': 'Mozilla/5.0'})
-                        with urllib.request.urlopen(file_req) as f_resp:
-                            content = f_resp.read().decode('utf-8')
-                            md_files[path] = content
-                if md_files:
-                    break
-        except Exception:
-            continue
-
-    return md_files
-
 def sync():
-    print(f"Starting automatic repo discovery and Markdown sync for {CODEBERG_USER}...")
+    print(f"Starting GitHub auto-discovery and Markdown sync for {GITHUB_USER}...")
     
     projects = []
     if os.path.exists(PROJECTS_JSON):
         with open(PROJECTS_JSON, 'r', encoding='utf-8') as f:
             projects = json.load(f)
 
-    # 1. Discover any new public repos on Codeberg or GitHub
-    discovered_repos = discover_user_repos()
-    existing_urls = {p.get('github', '').lower().rstrip('/') for p in projects}
+    # Discover any new public GitHub repositories
+    discovered = discover_github_repos()
+    existing_urls = {p.get('github', '').lower().rstrip('/') for p in projects if p.get('github')}
     existing_folders = {p.get('repo_folder', '').lower() for p in projects}
 
     added_count = 0
-    for disc in discovered_repos:
+    for disc in discovered:
         disc_url = disc.get('github', '').lower().rstrip('/')
         disc_folder = disc.get('repo_folder', '').lower()
         if disc_url not in existing_urls and disc_folder not in existing_folders:
@@ -161,21 +95,21 @@ def sync():
             existing_urls.add(disc_url)
             existing_folders.add(disc_folder)
             added_count += 1
-            print(f"Discovered new repository: {disc['title']} ({disc['github']})")
+            print(f"Discovered new GitHub repository: {disc['title']}")
 
     if added_count > 0:
-        print(f"Added {added_count} new repository/repositories to projects.")
+        print(f"Added {added_count} new GitHub repository/repositories.")
 
     os.makedirs(MARKDOWN_DIR, exist_ok=True)
     md_index = {}
 
-    # 2. Sync Markdown files for all projects
+    # Sync Markdown files for all projects
     for project in projects:
-        repo_url = project.get('github') or project.get('codeberg') or project.get('repo_url', '')
-        if not repo_url:
+        github_url = project.get('github', '')
+        if not github_url or 'github.com/' not in github_url:
             continue
         
-        parts = repo_url.rstrip('/').split('/')
+        parts = github_url.rstrip('/').split('/')
         if len(parts) < 2:
             continue
 
@@ -185,13 +119,8 @@ def sync():
         out_dir = os.path.join(MARKDOWN_DIR, repo_folder)
         os.makedirs(out_dir, exist_ok=True)
 
-        md_files_data = {}
         try:
-            if 'codeberg.org' in repo_url:
-                md_files_data = sync_codeberg(owner, repo)
-            else:
-                md_files_data = sync_github(owner, repo)
-
+            md_files_data = sync_github_repo(owner, repo)
             if md_files_data:
                 file_paths = list(md_files_data.keys())
                 for path, content in md_files_data.items():
