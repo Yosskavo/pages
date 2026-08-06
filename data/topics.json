@@ -1,0 +1,18 @@
+[
+  {
+    "id": "topic-1",
+    "title": "Unix Processes & Signals",
+    "category": "Systems",
+    "summary": "Notes on process creation (fork), binary execution (execve), IPC pipelines, and handling asynchronous Unix signals in C.",
+    "tags": ["C", "Unix", "Processes"],
+    "date": "2026-08-06"
+  },
+  {
+    "id": "topic-2",
+    "title": "Container Isolation Mechanics",
+    "category": "DevOps",
+    "summary": "Exploring Linux namespaces, cgroups, chroot, and how Docker wraps kernel features to isolate multi-service web stacks.",
+    "tags": ["Docker", "Linux", "Containers"],
+    "date": "2026-08-06"
+  }
+]

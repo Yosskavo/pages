@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="../random/random.html">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="projects">
+        <h2>Projects Showcase</h2>
+        <p>A selection of systems, graphics, and networking projects I've built from scratch:</p>
+
+        <!-- Search, Filter & Sort Controls Bar -->
+        <div class="controls-bar">
+            <input type="text" id="search-input" placeholder="Search projects by name, description, or tech..." class="search-input">
+            
+            <select id="filter-select" class="sort-select">
+                <option value="all">Filter: All Projects</option>
+                <option value="markdown">Has Documentation (.md)</option>
+                <option value="systems">Systems (C / C++)</option>
+                <option value="devops">DevOps (Docker)</option>
+                <option value="neovim">Neovim &amp; Shell</option>
+            </select>
+
+            <select id="sort-select" class="sort-select">
+                <option value="default">Sort: Default</option>
+                <option value="newest">Date: Newest First</option>
+                <option value="oldest">Date: Oldest First</option>
+                <option value="az">Name: A to Z</option>
+                <option value="za">Name: Z to A</option>
+            </select>
+        </div>
+
+        <div id="projects-container">
+            <!-- Dynamic project cards loaded from data/projects.json -->
+        </div>
+    </section>
+
+    <script>
+        let allProjects = [];
+
+        function renderProjects() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const filterVal = document.getElementById('filter-select').value;
+            const sortVal = document.getElementById('sort-select').value;
+            const container = document.getElementById('projects-container');
+
+            let filtered = allProjects.filter(p => {
+                const title = (p.title || '').toLowerCase();
+                const desc = (p.description || '').toLowerCase();
+                const tech = (p.tech || '').toLowerCase();
+                const matchesQuery = title.includes(query) || desc.includes(query) || tech.includes(query);
+                if (!matchesQuery) return false;
+
+                if (filterVal === 'markdown') {
+                    return Boolean(p.repo_folder);
+                } else if (filterVal === 'systems') {
+                    return tech.includes('c') || tech.includes('c++') || (p.language || '').toLowerCase() === 'c' || (p.language || '').toLowerCase() === 'c++';
+                } else if (filterVal === 'devops') {
+                    return tech.includes('docker') || tech.includes('nginx') || tech.includes('linux');
+                } else if (filterVal === 'neovim') {
+                    return title.includes('nvim') || title.includes('zsh') || tech.includes('lua') || tech.includes('shell');
+                }
+                return true;
+            });
+
+            if (sortVal === 'newest') {
+                filtered.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
+            } else if (sortVal === 'oldest') {
+                filtered.sort((a, b) => (a.created_at || '').localeCompare(b.created_at || ''));
+            } else if (sortVal === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortVal === 'za') {
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p>No matching projects found.</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(project => `
+                <article class="project-card">
+                    <div class="card-header-block">
+                        <h3>${project.repo_folder ? `<a href="view.html?repo=${project.repo_folder}">${project.title}</a>` : project.title}</h3>
+                        ${project.created_at ? `<div class="date-badge">${project.created_at}</div>` : ''}
+                    </div>
+                    <p>${project.description}</p>
+                    ${project.tech ? `<ul><li><strong>Tech:</strong> ${project.tech}</li></ul>` : ''}
+                    <div class="card-footer-stacked">
+                        ${project.github ? `<a href="${project.github}" target="_blank" class="source-link">View Source Code</a>` : ''}
+                        ${project.repo_folder ? `<a href="view.html?repo=${project.repo_folder}" class="doc-link">View Documentation (.md) &rarr;</a>` : ''}
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        fetch('../../data/projects.json')
+            .then(res => res.json())
+            .then(projects => {
+                allProjects = projects;
+                renderProjects();
+            })
+            .catch(err => {
+                document.getElementById('projects-container').innerHTML = '<p>Unable to load projects. Check <code>data/projects.json</code>!</p>';
+            });
+
+        document.getElementById('search-input').addEventListener('input', renderProjects);
+        document.getElementById('filter-select').addEventListener('change', renderProjects);
+        document.getElementById('sort-select').addEventListener('change', renderProjects);
+    </script>
+</body>
+</html>

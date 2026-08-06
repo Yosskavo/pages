@@ -1,0 +1,483 @@
+body {
+    /* Uses Flexbox to align the main layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all sections and blocks horizontally */
+    
+    /* Centers text, headings, and inline elements (like your badge images) */
+    text-align: center;
+    
+    /* Removes the default browser margin so things look clean */
+    margin: 0;
+    
+    /* Adds a little breathing room around the edges of the screen */
+    padding: 0 20px 20px 20px; 
+}
+
+/* Constrain the width so the text doesn't stretch too far on wide screens */
+section {
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Define Tokyo Night colors for the whole document */
+:root {
+    --tokyo-bg: #1a1b26;       /* Deep dark blue background */
+    --tokyo-card: #24283b;     /* Slightly lighter blue for the project cards */
+    --tokyo-text: #c0caf5;     /* Soft, readable blue-white text */
+    --tokyo-border: #414868;   /* Subtle border color */
+    
+    --tokyo-purple: #bb9af7;   /* Tokyo Night purple */
+    --tokyo-orange: #ff9e64;   /* Tokyo Night orange */
+    --tokyo-blue: #7aa2f7;     /* Tokyo Night blue */
+	--tokyo-cyan: #7dcfff;     /* For project titles */
+    --tokyo-green: #9ece6a;
+}
+
+/* Apply the background and text color to the whole page */
+body {
+    background-color: var(--tokyo-bg);
+    color: var(--tokyo-text);
+}
+
+/* Sticky Top Navigation Bar */
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--tokyo-bg);
+    border-bottom: 1px solid var(--tokyo-border);
+    z-index: 1000;
+    padding: 15px 0;
+    margin-bottom: 25px;
+}
+
+.nav-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--tokyo-blue);
+    text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--tokyo-purple);
+    text-decoration: underline;
+}
+
+/* Section Header with See All Link */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    margin: 0;
+}
+
+.see-all-link {
+    color: var(--tokyo-blue);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.see-all-link:hover {
+    color: var(--tokyo-purple);
+    text-decoration: underline;
+}
+
+/* ========================================= */
+/* Search & Sort Controls Bar                */
+/* ========================================= */
+
+.controls-bar {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.search-input, .sort-select {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    color: var(--tokyo-text);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.search-input {
+    flex-grow: 1;
+}
+
+.search-input:focus, .sort-select:focus {
+    border-color: var(--tokyo-purple);
+}
+
+.card-label {
+    color: var(--tokyo-orange);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.card-header-block {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.card-header-block h3 {
+    margin-top: 0;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.date-badge {
+    color: var(--tokyo-purple);
+    font-size: 0.85rem;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+}
+
+.card-footer-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    text-align: center;
+}
+
+.card-footer-stacked a {
+    display: inline-block;
+    margin-top: 0;
+}
+
+.doc-link {
+    color: var(--tokyo-cyan);
+    font-weight: 500;
+}
+
+/* Card Titles (h3) */
+article h3,
+article h3 a {
+    color: var(--tokyo-cyan); 
+}
+
+article h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Descriptions (paragraphs) */
+article p {
+    color: var(--tokyo-text); /* Uses the soft white/blue from the theme */
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Tech Stack list items */
+article li {
+    color: var(--tokyo-green); /* Tech stack content gets a new color */
+    margin-bottom: 10px;
+}
+
+/* The bold 'Tech:' label */
+article strong {
+    color: var(--tokyo-purple);
+}
+
+/* Apply purple specifically to h2 titles */
+h2 {
+    color: var(--tokyo-purple);
+}
+
+/* Apply blue to all general links */
+a {
+    color: var(--tokyo-blue);
+    text-decoration: none; /* Keeps it clean without the default underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Adds the underline back when hovering */
+}
+
+ul {
+    /* Makes the list wrap tightly around its content instead of stretching across the screen */
+    display: inline-block;
+    
+    /* Aligns the text (and bullets) to the left edge of this tight block */
+    text-align: left;
+    
+    /* Puts the bullets back on the outside so the text aligns perfectly straight */
+    list-style-position: outside; 
+}
+
+/* ========================================= */
+/* Project Card Specific Styling             */
+/* ========================================= */
+
+article {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    
+    /* Adds a very subtle dark shadow to lift the card off the background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Make your "View Source Code" links pop with the Tokyo Night accent blue and center them */
+article a {
+    display: block; /* Forces the link to drop to its own line */
+    margin-top: 15px; 
+    color: var(--tokyo-blue);
+    text-decoration: none;
+}
+
+article a:hover {
+    text-decoration: underline;
+}
+
+/* Color the main greeting title */
+h1 {
+    color: var(--tokyo-blue);
+}
+
+/* Color the 'Tech Stack & Tools' subtitle */
+#about h3 {
+    color: var(--tokyo-cyan);
+}
+
+/* Color the tech stack list items green */
+#about li {
+    color: var(--tokyo-green);
+    margin-bottom: 10px;
+}
+
+/* Color the bold labels (Languages, DevOps & Tools, etc.) purple */
+#about strong {
+    color: var(--tokyo-purple);
+}
+
+/* ========================================= */
+/* Album Review Specific Card Styling        */
+/* ========================================= */
+
+.album-card {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    text-align: left;
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.album-cover {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--tokyo-border);
+    flex-shrink: 0;
+}
+
+.album-details {
+    flex-grow: 1;
+}
+
+.album-details h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.album-meta {
+    color: var(--tokyo-text);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.genre {
+    color: var(--tokyo-purple);
+}
+
+.rating strong {
+    color: var(--tokyo-orange);
+}
+
+.review-text {
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustment for nav and album cards */
+@media (max-width: 550px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .album-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* ========================================= */
+/* README Viewer Styling                     */
+/* ========================================= */
+
+#readme-viewer {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.viewer-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.file-selector-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.file-label {
+    color: var(--tokyo-cyan);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.file-select {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    color: var(--tokyo-text);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.file-select:focus {
+    border-color: var(--tokyo-purple);
+}
+
+.readme-card {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    line-height: 1.7;
+}
+
+.readme-card code {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: var(--tokyo-orange);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.readme-card pre {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--tokyo-border);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.readme-card pre code {
+    background: none;
+    padding: 0;
+    color: var(--tokyo-text);
+}
+
+.readme-card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* ========================================= */
+/* Contact Page Specific Styling             */
+/* ========================================= */
+
+.contact-card {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.contact-card h3 {
+    color: var(--tokyo-cyan);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.email-address {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: var(--tokyo-purple);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.action-btn {
+    background-color: var(--tokyo-bg);
+    border: 1px solid var(--tokyo-purple);
+    color: var(--tokyo-purple);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--tokyo-purple);
+    color: var(--tokyo-bg);
+}
+
+.copy-status {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--tokyo-green);
+    font-weight: bold;
+}

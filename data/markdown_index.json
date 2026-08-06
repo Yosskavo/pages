@@ -1,0 +1,82 @@
+{
+  "minishell": [
+    "README.md"
+  ],
+  "nvim": [
+    "README.md",
+    "DOCUMENTATION.md",
+    "TODO.md",
+    "docs/FULL_DOCUMENTATION.md",
+    "docs/README.md",
+    "docs/commands-autocmds.md",
+    "docs/ext.md",
+    "docs/helpers-42.md",
+    "docs/keymaps.md",
+    "docs/lsp.md",
+    "docs/overview.md",
+    "docs/setup.md",
+    "docs/themes.md",
+    "docs/tree.md",
+    "docs/whichkey.md"
+  ],
+  "Yosskavo": [
+    "README.md"
+  ],
+  "inverted": [
+    "README.md"
+  ],
+  "Stratex": [
+    "README.md",
+    "docs/Correlation.md",
+    "docs/Drowdown.md",
+    "docs/Sharpe ratio.md",
+    "docs/Volatility.md",
+    "docs/strategys/Momentum.md",
+    "docs/strategys/RSI.md",
+    "tradingagents/README.md",
+    "tradingagents/tradingagents/llm_clients/TODO.md"
+  ],
+  "libft": [
+    "README.md"
+  ],
+  "trust-system": [
+    "README.md"
+  ],
+  "my-config": [
+    "README.md",
+    "my-zsh-theme/README.md",
+    "spicetify/CustomApps/marketplace/README.md"
+  ],
+  "net-practice": [
+    "README.md"
+  ],
+  "my-zsh-theme": [
+    "README.md"
+  ],
+  "shekai.nvim": [
+    "README.md"
+  ],
+  "spotify.nvim": [
+    "README.md"
+  ],
+  "Inception": [
+    "README.md",
+    "DEV_DOC.md",
+    "USER_DOC.md"
+  ],
+  ".profile": [
+    "README.md"
+  ],
+  "webserv": [
+    "README.md"
+  ],
+  "cpp-abo-hadhoud": [
+    "README.md"
+  ],
+  "Print_limits": [
+    "README.md"
+  ],
+  "neetcode-submissions": [
+    "README.md"
+  ]
+}

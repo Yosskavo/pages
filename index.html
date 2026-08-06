@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Page</title>
 	<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="html/projects/projects.html">Projects</a></li>
+                <li><a href="html/random/random.html">Random</a></li>
+                <li><a href="html/contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <h1>Greeting From Yosskavo (yel-mota)</h1>
 
     <section id="about">
@@ -32,73 +43,65 @@
         </ul>
     </section>
 
-    <section id="projects">
-        <h2>Projects Showcase</h2>
-        <p>A selection of systems, graphics, and networking projects I've built from scratch:</p>
+    <!-- Recent Project Section -->
+    <section id="recent-project">
+        <div class="section-header">
+            <h2>Recent project</h2>
+            <a href="html/projects/projects.html" class="see-all-link">See all projects &rarr;</a>
+        </div>
 
-        <!-- Minishell -->
-        <article class="project-card">
-            <h3>Minishell</h3>
-            <p>A custom Unix shell implementation capable of parsing, executing commands, handling pipes, redirections, and environment variables.</p>
-            <ul>
-                <li><strong>Tech:</strong> C, Process Management (fork, execve), Signals, Pipelines</li>
-            </ul>
-            <a href="https://github.com/yosskavo/minishell" target="_blank">View Source Code</a>
-        </article>
-
-        <!-- cub3D -->
-        <article class="project-card">
-            <h3>cub3D</h3>
-            <p>A 3D graphical engine built from scratch using raycasting techniques, inspired by the classic 1992 game Wolfenstein 3D.</p>
-            <ul>
-                <li><strong>Tech:</strong> C, Raycasting, MiniLibX, Math / Trigonometry</li>
-            </ul>
-            <a href="https://github.com/yosskavo/cub3d" target="_blank">View Source Code</a>
-        </article>
-
-        <!-- Inception -->
-        <article class="project-card">
-            <h3>Inception</h3>
-            <p>A system administration project building a multi-service containerized architecture with WordPress, MariaDB, and Nginx using Docker.</p>
-            <ul>
-                <li><strong>Tech:</strong> Docker, Docker-Compose, Nginx, Shell Scripting, TLS/SSL</li>
-            </ul>
-            <a href="https://github.com/yosskavo/Inception" target="_blank">View Source Code</a>
-        </article>
-
-        <!-- NetPractice -->
-        <article class="project-card">
-            <h3>NetPractice</h3>
-            <p>A practical networking project focused on configuring small IP networks, calculating subnet masks, routing tables, and CIDR blocks.</p>
-            <ul>
-                <li><strong>Tech:</strong> TCP/IP, Subnetting, Network Addressing, CIDR</li>
-            </ul>
-            <a href="https://github.com/yosskavo/net-practice" target="_blank">View Source Code</a>
-        </article>
-
-        <!-- Push_swap -->
-        <article class="project-card">
-            <h3>Push_swap</h3>
-            <p>An algorithmic project to sort a stack of integers using a limited set of instructions, optimized for the lowest possible operation count.</p>
-            <ul>
-                <li><strong>Tech:</strong> C, Sorting Algorithms, Data Structures (Stacks), Complexity Optimization</li>
-            </ul>
-            <a href="https://github.com/yosskavo/push-swap" target="_blank">View Source Code</a>
-        </article>
+        <div id="recent-project-container">
+            <!-- Loaded dynamically from data/projects.json -->
+        </div>
     </section>
 
-	<section id="find-me">
-		<h2>Find Me</h2>
+    <!-- Next Project Section -->
+    <section id="next-project">
+        <div class="section-header">
+            <h2>Next projects</h2>
+            <a href="html/random/goals.html" class="see-all-link">See next goals &rarr;</a>
+        </div>
 
-		<div class="social-links">
-			<a href="https://github.com/Yosskavo" target="_blank" rel="noopener">GitHub</a>
-			<a href="https://www.linkedin.com/in/Yosskavo/" target="_blank" rel="noopener">LinkedIn</a>
-			<a href="https://codeberg.org/Yosskavo" target="_blank" rel="noopener">Codeberg</a>
-			<a href="https://open.spotify.com/user/31eyb3ih3ebpcxsmqectodeibr2q" target="_blank" rel="noopener">Spotify</a>
-			<a href="https://x.com/Yosskavo" target="_blank" rel="noopener">X</a>
-			<a href="https://www.reddit.com/user/Yosskavo" target="_blank" rel="noopener">Reddit</a>
-			<a href="mailto:yassutoshekai@gmail.com" target="_blank" rel="noopener">Email</a>
-		</div>
-	</section>
+        <div id="next-project-container">
+            <!-- Loaded dynamically from data/goals.json -->
+        </div>
+    </section>
+
+    <script>
+        // Load Recent Project dynamically from data/projects.json
+        fetch('data/projects.json')
+            .then(res => res.json())
+            .then(projects => {
+                const container = document.getElementById('recent-project-container');
+                const recent = projects.find(p => p.is_recent) || projects[0];
+                if (recent) {
+                    container.innerHTML = `
+                        <article class="project-card">
+                            <h3>${recent.repo_folder ? `<a href="html/projects/view.html?repo=${recent.repo_folder}">${recent.title}</a>` : recent.title}</h3>
+                            <p>${recent.description}</p>
+                            ${recent.tech ? `<ul><li><strong>Tech:</strong> ${recent.tech}</li></ul>` : ''}
+                            ${recent.github ? `<a href="${recent.github}" target="_blank">View Source Code</a>` : ''}
+                        </article>
+                    `;
+                }
+            });
+
+        // Load Next Project dynamically from data/goals.json
+        fetch('data/goals.json')
+            .then(res => res.json())
+            .then(goals => {
+                const container = document.getElementById('next-project-container');
+                const nextGoal = goals.find(g => g.id === 'webserv') || goals[0];
+                if (nextGoal) {
+                    container.innerHTML = `
+                        <article class="project-card">
+                            <h3>${nextGoal.title}</h3>
+                            <p>${nextGoal.description}</p>
+                            ${nextGoal.tech ? `<ul><li><strong>Tech:</strong> ${nextGoal.tech}</li></ul>` : ''}
+                        </article>
+                    `;
+                }
+            });
+    </script>
 </body>
 </html>

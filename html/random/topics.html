@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topics | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="random.html" class="active">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="topics">
+        <h2>Topics</h2>
+        <p>Notes on low-level systems programming, Unix environments, and developer tooling:</p>
+
+        <!-- Search & Sort Controls Bar -->
+        <div class="controls-bar">
+            <input type="text" id="search-input" placeholder="Search topics by title, summary, or tags..." class="search-input">
+            <select id="sort-select" class="sort-select">
+                <option value="default">Sort: Default</option>
+                <option value="az">Title: A to Z</option>
+                <option value="za">Title: Z to A</option>
+            </select>
+        </div>
+
+        <div id="topics-container">
+            <!-- Dynamic content loaded from data/topics.json -->
+        </div>
+
+        <p><a href="random.html">&larr; Back to Random</a></p>
+    </section>
+
+    <script>
+        let allTopics = [];
+
+        function renderTopics() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sort-select').value;
+            const container = document.getElementById('topics-container');
+
+            let filtered = allTopics.filter(t => {
+                const title = (t.title || '').toLowerCase();
+                const summary = (t.summary || '').toLowerCase();
+                const tags = (t.tags ? t.tags.join(' ') : '').toLowerCase();
+                return title.includes(query) || summary.includes(query) || tags.includes(query);
+            });
+
+            if (sortVal === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortVal === 'za') {
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p>No matching topics found.</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(topic => `
+                <article class="project-card">
+                    <h3>${topic.title}</h3>
+                    <p>${topic.summary}</p>
+                    ${topic.tags ? `<p><strong>Tags:</strong> ${topic.tags.join(', ')}</p>` : ''}
+                </article>
+            `).join('');
+        }
+
+        fetch('../../data/topics.json')
+            .then(res => res.json())
+            .then(topics => {
+                allTopics = topics;
+                renderTopics();
+            })
+            .catch(err => {
+                document.getElementById('topics-container').innerHTML = '<p>No topics added yet. Add entries to <code>data/topics.json</code>!</p>';
+            });
+
+        document.getElementById('search-input').addEventListener('input', renderTopics);
+        document.getElementById('sort-select').addEventListener('change', renderTopics);
+    </script>
+</body>
+</html>

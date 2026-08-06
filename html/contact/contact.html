@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="../random/random.html">Random</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="contact-section">
+        <h2>Get In Touch</h2>
+        <p>Feel free to reach out for collaborations, project discussions, or questions:</p>
+
+        <!-- Direct Email Card -->
+        <article class="contact-card">
+            <h3>Direct Email</h3>
+            <p class="email-address">yassutoshekai@gmail.com</p>
+            <button id="copy-email-btn" class="action-btn">Copy Email Address</button>
+            <span id="copy-status" class="copy-status"></span>
+        </article>
+
+        <!-- Location & Institution Info Card -->
+        <article class="contact-card">
+            <h3>Location &amp; Education</h3>
+            <p>Software Engineering Student at <strong>1337 School (UM6P)</strong></p>
+            <p>Morocco</p>
+        </article>
+
+        <!-- Social Profiles -->
+        <h2>Social Profiles</h2>
+        <div class="social-links">
+            <a href="https://github.com/Yosskavo" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/Yosskavo/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://codeberg.org/Yosskavo" target="_blank" rel="noopener">Codeberg</a>
+            <a href="https://open.spotify.com/user/31eyb3ih3ebpcxsmqectodeibr2q" target="_blank" rel="noopener">Spotify</a>
+            <a href="https://x.com/Yosskavo" target="_blank" rel="noopener">X</a>
+            <a href="https://www.reddit.com/user/Yosskavo" target="_blank" rel="noopener">Reddit</a>
+        </div>
+    </section>
+
+    <script>
+        const copyBtn = document.getElementById('copy-email-btn');
+        const copyStatus = document.getElementById('copy-status');
+        const email = 'yassutoshekai@gmail.com';
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(email).then(() => {
+                copyStatus.textContent = 'Copied to clipboard!';
+                setTimeout(() => {
+                    copyStatus.textContent = '';
+                }, 3000);
+            }).catch(() => {
+                copyStatus.textContent = 'Failed to copy.';
+            });
+        });
+    </script>
+</body>
+</html>

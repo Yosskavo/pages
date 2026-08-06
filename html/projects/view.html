@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- Marked JS Parser for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="../random/random.html">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="readme-viewer">
+        <div class="viewer-controls">
+            <!-- File Selector in Top Left -->
+            <div class="file-selector-wrapper">
+                <label for="file-select" class="file-label">Documentation File:</label>
+                <select id="file-select" class="file-select">
+                    <option value="README.md">README.md</option>
+                </select>
+            </div>
+
+            <a href="projects.html" class="see-all-link">&larr; Back to Projects</a>
+        </div>
+
+        <div class="section-header">
+            <h2 id="project-title">Project Documentation</h2>
+        </div>
+
+        <article class="readme-card" id="readme-content">
+            <p>Loading documentation...</p>
+        </article>
+
+        <p><a href="projects.html">&larr; Back to Projects</a></p>
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const repo = urlParams.get('repo');
+        let currentFile = urlParams.get('file') || 'README.md';
+
+        const fileSelect = document.getElementById('file-select');
+        const readmeContent = document.getElementById('readme-content');
+        const projectTitle = document.getElementById('project-title');
+
+        if (!repo) {
+            readmeContent.innerHTML = '<p>No project specified.</p>';
+        } else {
+            // Load list of available .md files for this project
+            fetch('../../data/markdown_index.json')
+                .then(res => res.json())
+                .then(index => {
+                    const files = index[repo] || ['README.md'];
+                    fileSelect.innerHTML = files.map(f => `
+                        <option value="${f}" ${f === currentFile ? 'selected' : ''}>${f}</option>
+                    `).join('');
+
+                    loadMarkdown(currentFile);
+                })
+                .catch(err => {
+                    loadMarkdown(currentFile);
+                });
+        }
+
+        function loadMarkdown(filename) {
+            currentFile = filename;
+            projectTitle.textContent = `${repo} / ${filename}`;
+            fileSelect.value = filename;
+
+            // Update URL parameters without reloading page
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.set('repo', repo);
+            newUrl.searchParams.set('file', filename);
+            window.history.pushState({}, '', newUrl);
+
+            fetch(`../../markdown/${repo}/${filename}`)
+                .then(res => {
+                    if (!res.ok) throw new Error('File not found');
+                    return res.text();
+                })
+                .then(mdText => {
+                    if (window.marked) {
+                        readmeContent.innerHTML = window.marked.parse(mdText);
+                    } else {
+                        readmeContent.innerHTML = '<pre>' + mdText + '</pre>';
+                    }
+                    attachLinkInterceptors();
+                })
+                .catch(err => {
+                    readmeContent.innerHTML = `<p>Documentation file <code>${filename}</code> is not available.</p>`;
+                });
+        }
+
+        // Intercept internal links ending in .md
+        function attachLinkInterceptors() {
+            const links = readmeContent.querySelectorAll('a');
+            links.forEach(a => {
+                const href = a.getAttribute('href');
+                if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#')) {
+                    if (href.toLowerCase().endsWith('.md')) {
+                        a.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            let targetPath = resolveRelativePath(currentFile, href);
+                            loadMarkdown(targetPath);
+                        });
+                    }
+                } else if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+                    a.setAttribute('target', '_blank');
+                    a.setAttribute('rel', 'noopener');
+                }
+            });
+        }
+
+        // Helper to resolve relative markdown paths (e.g. docs/lsp.md or ../DEV_DOC.md)
+        function resolveRelativePath(baseFile, relativeLink) {
+            const stack = baseFile.split('/');
+            stack.pop(); // remove current filename
+            const parts = relativeLink.split('/');
+            for (let part of parts) {
+                if (part === '.') continue;
+                if (part === '..') {
+                    if (stack.length > 0) stack.pop();
+                } else {
+                    stack.push(part);
+                }
+            }
+            return stack.join('/');
+        }
+
+        fileSelect.addEventListener('change', (e) => {
+            loadMarkdown(e.target.value);
+        });
+    </script>
+</body>
+</html>

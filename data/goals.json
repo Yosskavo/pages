@@ -1,0 +1,17 @@
+[
+  {
+    "id": "webserv",
+    "title": "webserv",
+    "status": "In Progress",
+    "description": "An HTTP/1.1 web server written in C++98 from scratch, handling non-blocking sockets, I/O multiplexing, CGI execution, and custom configuration parsing.",
+    "tech": "C++98, Sockets, I/O Multiplexing, HTTP/1.1, CGI",
+    "target_date": "2026 Q3"
+  },
+  {
+    "id": "goal-2",
+    "title": "Explore Go & Odin Systems Programming",
+    "status": "Exploring",
+    "description": "Experiment with Odin's manual memory allocation and Go's concurrency primitives for network tools.",
+    "target_date": "2026 Q4"
+  }
+]

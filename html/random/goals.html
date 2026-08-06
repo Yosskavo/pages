@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Goals | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="random.html" class="active">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="goals">
+        <h2>Next Goals</h2>
+        <p>Current roadmap, upcoming projects, and technologies I'm diving into:</p>
+
+        <!-- Search & Sort Controls Bar -->
+        <div class="controls-bar">
+            <input type="text" id="search-input" placeholder="Search goals by title or description..." class="search-input">
+            <select id="sort-select" class="sort-select">
+                <option value="default">Sort: Default</option>
+                <option value="az">Title: A to Z</option>
+                <option value="za">Title: Z to A</option>
+            </select>
+        </div>
+
+        <div id="goals-container">
+            <!-- Dynamic content loaded from data/goals.json -->
+        </div>
+
+        <p><a href="random.html">&larr; Back to Random</a></p>
+    </section>
+
+    <script>
+        let allGoals = [];
+
+        function renderGoals() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sort-select').value;
+            const container = document.getElementById('goals-container');
+
+            let filtered = allGoals.filter(g => {
+                const title = (g.title || '').toLowerCase();
+                const desc = (g.description || '').toLowerCase();
+                const status = (g.status || '').toLowerCase();
+                return title.includes(query) || desc.includes(query) || status.includes(query);
+            });
+
+            if (sortVal === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortVal === 'za') {
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p>No matching goals found.</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(goal => `
+                <article class="project-card">
+                    <h3>${goal.title}</h3>
+                    <p>${goal.description}</p>
+                    <p><strong>Status:</strong> ${goal.status} ${goal.target_date ? `(${goal.target_date})` : ''}</p>
+                </article>
+            `).join('');
+        }
+
+        fetch('../../data/goals.json')
+            .then(res => res.json())
+            .then(goals => {
+                allGoals = goals;
+                renderGoals();
+            })
+            .catch(err => {
+                document.getElementById('goals-container').innerHTML = '<p>No goals added yet. Add entries to <code>data/goals.json</code>!</p>';
+            });
+
+        document.getElementById('search-input').addEventListener('input', renderGoals);
+        document.getElementById('sort-select').addEventListener('change', renderGoals);
+    </script>
+</body>
+</html>

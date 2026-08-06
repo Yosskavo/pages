@@ -1,0 +1,24 @@
+[
+  {
+    "id": "album-1",
+    "title": "Untrue",
+    "artist": "Burial",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/2/2a/Burial_-_Untrue.jpg",
+    "genre": "Dubstep / Ambient",
+    "rating": "10/10",
+    "review": "A seminal masterpiece in atmospheric soundscapes, combining crackling vinyl textures, pitch-shifted vocal samples, and nocturnal garage rhythms.",
+    "favorite_tracks": ["Archangel", "Etched Headplate"],
+    "date": "2026-08-06"
+  },
+  {
+    "id": "album-2",
+    "title": "Selected Ambient Works 85-92",
+    "artist": "Aphex Twin",
+    "cover": "https://upload.wikimedia.org/wikipedia/en/d/d4/Aphex_Twin_-_Selected_Ambient_Works_85-92.jpg",
+    "genre": "IDM / Ambient Techno",
+    "rating": "9.5/10",
+    "review": "Timeless electronic music crafted with home-built synths. Lush pads and hypnotic drum patterns that laid the foundation for modern IDM.",
+    "favorite_tracks": ["Xtal", "Heliosphan"],
+    "date": "2026-08-06"
+  }
+]

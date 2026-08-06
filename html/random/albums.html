@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Reviews | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="random.html" class="active">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="album-reviews">
+        <h2>Album Reviews</h2>
+        <p>Personal reviews, highlights, and thoughts on my favorite music albums:</p>
+
+        <!-- Search & Sort Controls Bar -->
+        <div class="controls-bar">
+            <input type="text" id="search-input" placeholder="Search album reviews by title, artist, or genre..." class="search-input">
+            <select id="sort-select" class="sort-select">
+                <option value="default">Sort: Default</option>
+                <option value="az">Title: A to Z</option>
+                <option value="za">Title: Z to A</option>
+            </select>
+        </div>
+
+        <div id="albums-container">
+            <!-- Dynamic content loaded from data/albums.json -->
+        </div>
+
+        <p><a href="random.html">&larr; Back to Random</a></p>
+    </section>
+
+    <script>
+        let allAlbums = [];
+
+        function renderAlbums() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sort-select').value;
+            const container = document.getElementById('albums-container');
+
+            let filtered = allAlbums.filter(a => {
+                const title = (a.title || '').toLowerCase();
+                const artist = (a.artist || '').toLowerCase();
+                const genre = (a.genre || '').toLowerCase();
+                const review = (a.review || '').toLowerCase();
+                return title.includes(query) || artist.includes(query) || genre.includes(query) || review.includes(query);
+            });
+
+            if (sortVal === 'az') {
+                filtered.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (sortVal === 'za') {
+                filtered.sort((a, b) => b.title.localeCompare(a.title));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p>No matching album reviews found.</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(album => `
+                <article class="album-card">
+                    ${album.cover ? `<img src="${album.cover}" alt="${album.title} cover" class="album-cover" loading="lazy">` : ''}
+                    <div class="album-details">
+                        <h3>${album.title}</h3>
+                        <p class="album-meta"><strong>${album.artist}</strong> • <span class="genre">${album.genre}</span></p>
+                        <p class="rating">Rating: <strong>${album.rating}</strong></p>
+                        <p class="review-text">${album.review}</p>
+                        ${album.favorite_tracks ? `<p class="tracks"><strong>Favorite Tracks:</strong> ${album.favorite_tracks.join(', ')}</p>` : ''}
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        fetch('../../data/albums.json')
+            .then(res => res.json())
+            .then(albums => {
+                allAlbums = albums;
+                renderAlbums();
+            })
+            .catch(err => {
+                document.getElementById('albums-container').innerHTML = '<p>No reviews added yet. Add entries to <code>data/albums.json</code>!</p>';
+            });
+
+        document.getElementById('search-input').addEventListener('input', renderAlbums);
+        document.getElementById('sort-select').addEventListener('change', renderAlbums);
+    </script>
+</body>
+</html>

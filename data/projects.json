@@ -1,0 +1,332 @@
+[
+  {
+    "id": "inception",
+    "title": "Inception",
+    "repo_folder": "Inception",
+    "description": "A system administration project building a multi-service containerized architecture with WordPress, MariaDB, and Nginx using Docker.",
+    "tech": "Docker, Docker-Compose, Nginx, Shell Scripting, TLS/SSL",
+    "github": "https://github.com/Yosskavo/Inception",
+    "is_recent": true,
+    "created_at": "2026-07-19",
+    "updated_at": "2026-08-06",
+    "language": "Makefile"
+  },
+  {
+    "id": "minishell",
+    "title": "Minishell",
+    "repo_folder": "minishell",
+    "description": "A custom Unix shell implementation capable of parsing, executing commands, handling pipes, redirections, and environment variables.",
+    "tech": "C, Process Management (fork, execve), Signals, Pipelines",
+    "github": "https://github.com/Yosskavo/minishell",
+    "created_at": "2025-04-17",
+    "updated_at": "2026-07-20",
+    "language": "C"
+  },
+  {
+    "id": "cub3d",
+    "title": "cub3D",
+    "description": "A 3D graphical engine built from scratch using raycasting techniques, inspired by the classic 1992 game Wolfenstein 3D.",
+    "tech": "C, Raycasting, MiniLibX, Math / Trigonometry",
+    "github": "https://github.com/Yosskavo/cub3d",
+    "created_at": "2025-10-06",
+    "updated_at": "2026-01-03",
+    "language": "C"
+  },
+  {
+    "id": "philosophers",
+    "title": "Philosophers",
+    "description": "A process synchronization and threading project solving the Dining Philosophers problem using mutexes, threads, and process handling in C.",
+    "tech": "C, Threads, Mutexes, POSIX, Concurrency",
+    "github": "https://github.com/Yosskavo/Philosophers",
+    "created_at": "2025-04-11",
+    "updated_at": "2026-05-09",
+    "language": "C"
+  },
+  {
+    "id": "netpractice",
+    "title": "NetPractice",
+    "repo_folder": "net-practice",
+    "description": "A practical networking project focused on configuring small IP networks, calculating subnet masks, routing tables, and CIDR blocks.",
+    "tech": "TCP/IP, Subnetting, Network Addressing, CIDR",
+    "github": "https://github.com/Yosskavo/net-practice",
+    "created_at": "2025-10-29",
+    "updated_at": "2025-10-29",
+    "language": null
+  },
+  {
+    "id": "push_swap",
+    "title": "Push_swap",
+    "description": "An algorithmic project to sort a stack of integers using a limited set of instructions, optimized for the lowest possible operation count.",
+    "tech": "C, Sorting Algorithms, Data Structures (Stacks), Complexity Optimization",
+    "github": "https://github.com/Yosskavo/push-swap",
+    "created_at": "2025-02-08",
+    "updated_at": "2025-04-06",
+    "language": "C"
+  },
+  {
+    "id": "so-long",
+    "title": "so-long",
+    "description": "A 2D top-down game built with MiniLibX in C featuring sprite rendering, map parsing, player movement, and collectible tracking.",
+    "tech": "C, MiniLibX, 2D Graphics, Event Loop, Map Parsing",
+    "github": "https://github.com/Yosskavo/so-long",
+    "created_at": "2025-03-26",
+    "updated_at": "2025-04-10",
+    "language": "C"
+  },
+  {
+    "id": "mini-talk",
+    "title": "mini-talk",
+    "description": "A small inter-process communication (IPC) system using UNIX signals (SIGUSR1 and SIGUSR2) to transmit strings between client and server.",
+    "tech": "C, UNIX Signals, Inter-Process Communication (IPC)",
+    "github": "https://github.com/Yosskavo/mini-talk",
+    "created_at": "2025-01-30",
+    "updated_at": "2025-04-06",
+    "language": "C"
+  },
+  {
+    "id": "born2beroot",
+    "title": "born2beroot",
+    "description": "A system administration project configuring a secure Debian Linux virtual machine with LVM partitioning, SSH, UFW firewall, and strict password policies.",
+    "tech": "Linux, Debian, LVM, SSH, UFW, Sudoers, SysAdmin",
+    "github": "https://github.com/Yosskavo/born2beroot",
+    "created_at": "2025-01-07",
+    "updated_at": "2025-02-12",
+    "language": "Shell"
+  },
+  {
+    "id": "cpp-modules",
+    "title": "cpp-modules",
+    "description": "A comprehensive suite of C++ modules covering Object-Oriented Programming (OOP), memory management, inheritance, polymorphism, and templates in C++98.",
+    "tech": "C++98, OOP, Polymorphism, Inheritance, Templates",
+    "github": "https://github.com/Yosskavo/cpp-modules",
+    "created_at": "2025-10-03",
+    "updated_at": "2026-06-16",
+    "language": "C++"
+  },
+  {
+    "id": "libft",
+    "title": "libft",
+    "repo_folder": "libft",
+    "description": "A custom implementation of standard C library functions built from scratch as the foundational library for 42 projects.",
+    "tech": "C, Memory Manipulation, String Handling, Data Structures",
+    "github": "https://github.com/Yosskavo/libft",
+    "created_at": "2024-11-10",
+    "updated_at": "2025-11-03",
+    "language": "C"
+  },
+  {
+    "id": "ft_printf",
+    "title": "ft_printf",
+    "description": "A custom re-implementation of the standard C printf function supporting formatted output conversions and variadic arguments.",
+    "tech": "C, Variadic Functions, String Formatting",
+    "github": "https://github.com/Yosskavo/ft_printf",
+    "created_at": "2024-11-19",
+    "updated_at": "2025-03-01",
+    "language": "C"
+  },
+  {
+    "id": "get-next-line",
+    "title": "get-next-line",
+    "description": "A C function designed to read content line by line from a file descriptor efficiently using static buffer management.",
+    "tech": "C, File I/O, Buffer Management, Static Variables",
+    "github": "https://github.com/Yosskavo/get-next-line",
+    "created_at": "2024-11-25",
+    "updated_at": "2024-12-13",
+    "language": "C"
+  },
+  {
+    "id": "spotify.nvim",
+    "title": "spotify.nvim",
+    "repo_folder": "spotify.nvim",
+    "description": "A custom Neovim plugin written in Lua to control Spotify playback directly inside the Neovim editor.",
+    "tech": "Lua, Neovim API, Spotify API",
+    "github": "https://github.com/Yosskavo/spotify.nvim",
+    "created_at": "2026-05-19",
+    "updated_at": "2026-05-19",
+    "language": "Python"
+  },
+  {
+    "id": "shekai.nvim",
+    "title": "shekai.nvim",
+    "repo_folder": "shekai.nvim",
+    "description": "A custom, minimalist Neovim configuration and theme tailored for low-level C/C++ systems development.",
+    "tech": "Lua, Neovim, Vimscript",
+    "github": "https://github.com/Yosskavo/shekai.nvim",
+    "created_at": "2026-02-24",
+    "updated_at": "2026-08-06",
+    "language": "Lua"
+  },
+  {
+    "id": "nvim",
+    "title": "nvim",
+    "repo_folder": "nvim",
+    "description": "Personal Neovim dotfiles and LSP configuration for C, C++, Rust, and Shell development.",
+    "tech": "Lua, Neovim, LSP, Treesitter",
+    "github": "https://github.com/Yosskavo/nvim",
+    "created_at": "2026-01-13",
+    "updated_at": "2026-08-01",
+    "language": "Lua"
+  },
+  {
+    "id": "my_config",
+    "title": "my_config",
+    "description": "Personal environment configuration scripts for Zsh, tmux, terminal emulators, and development tooling.",
+    "tech": "Shell, Zsh, Linux CLI, Dotfiles",
+    "github": "https://github.com/Yosskavo/my_config",
+    "created_at": "2026-04-11",
+    "updated_at": "2026-05-15",
+    "language": "Shell"
+  },
+  {
+    "id": "my-zsh-theme",
+    "title": "my-zsh-theme",
+    "repo_folder": "my-zsh-theme",
+    "description": "A lightweight, custom Zsh prompt theme optimized for fast terminal rendering and git status indicators.",
+    "tech": "Shell, Zsh, Git",
+    "github": "https://github.com/Yosskavo/my-zsh-theme",
+    "created_at": "2025-12-05",
+    "updated_at": "2026-04-11",
+    "language": "Shell"
+  },
+  {
+    "id": "neetcode-submissions",
+    "title": "neetcode-submissions",
+    "repo_folder": "neetcode-submissions",
+    "description": "A repository of algorithmic solutions and data structure practice problems from NeetCode and LeetCode.",
+    "tech": "C++, Algorithms, Data Structures, Problem Solving",
+    "github": "https://github.com/Yosskavo/neetcode-submissions",
+    "created_at": "2026-04-22",
+    "updated_at": "2026-06-04",
+    "language": "C++"
+  },
+  {
+    "id": "trust-system",
+    "title": "trust-system",
+    "repo_folder": "trust-system",
+    "description": "A system evaluation project focused on access control mechanisms and trust rating algorithms.",
+    "tech": "Systems, Security, Architecture",
+    "github": "https://github.com/Yosskavo/trust-system",
+    "created_at": "2026-02-12",
+    "updated_at": "2026-02-12",
+    "language": null
+  },
+  {
+    "id": "Stratex",
+    "title": "Stratex",
+    "repo_folder": "Stratex",
+    "description": "A software architecture and strategy exploration project.",
+    "tech": "Software Architecture, Development",
+    "github": "https://github.com/Yosskavo/Stratex",
+    "created_at": "2026-04-04",
+    "updated_at": "2026-04-02",
+    "language": null
+  },
+  {
+    "id": "inverted",
+    "title": "inverted",
+    "repo_folder": "inverted",
+    "description": "A low-level systems and utility tool project.",
+    "tech": "C, Systems Programming",
+    "github": "https://github.com/Yosskavo/inverted",
+    "created_at": "2026-05-05",
+    "updated_at": "2026-05-05",
+    "language": "C++"
+  },
+  {
+    "id": "cpp-abo-hadhoud",
+    "title": "cpp-abo-hadhoud",
+    "repo_folder": "cpp-abo-hadhoud",
+    "description": "C++ programming exercises, algorithms, and practical code snippets.",
+    "tech": "C++, OOP, Problem Solving",
+    "github": "https://github.com/Yosskavo/cpp-abo-hadhoud",
+    "created_at": "2025-02-19",
+    "updated_at": "2025-06-23",
+    "language": "C++"
+  },
+  {
+    "id": "draw",
+    "title": "draw",
+    "description": "An experimental graphics rendering and canvas drawing project.",
+    "tech": "C, Graphics, Rendering",
+    "github": "https://github.com/Yosskavo/draw",
+    "created_at": "2025-11-30",
+    "updated_at": "2025-12-01",
+    "language": "C"
+  },
+  {
+    "id": "Print_limits",
+    "title": "Print_limits",
+    "repo_folder": "Print_limits",
+    "description": "A C utility script designed to inspect data type integer limits, memory sizes, and alignment across systems.",
+    "tech": "C, Memory Limits, System Headers",
+    "github": "https://github.com/Yosskavo/Print_limits",
+    "created_at": "2024-12-23",
+    "updated_at": "2024-12-23",
+    "language": null
+  },
+  {
+    "id": "42-piscin",
+    "title": "42-piscin",
+    "description": "Repository containing C programming exercises and shell scripts from the 42 Intensive C Piscine.",
+    "tech": "C, Shell Scripting, Unix Commands",
+    "github": "https://github.com/Yosskavo/42-piscin",
+    "created_at": "2024-09-22",
+    "updated_at": "2024-11-19",
+    "language": "C"
+  },
+  {
+    "id": "yosskavo-profile",
+    "title": "Yosskavo Profile",
+    "repo_folder": "Yosskavo",
+    "description": "Official GitHub profile README repository highlighting student background, tech stack, and school projects.",
+    "tech": "Markdown, GitHub Profile",
+    "github": "https://github.com/Yosskavo/Yosskavo",
+    "created_at": "2025-04-27",
+    "updated_at": "2026-08-03",
+    "language": null
+  },
+  {
+    "id": ".profile",
+    "title": ".profile",
+    "repo_folder": ".profile",
+    "description": "Project repository for .profile.",
+    "tech": "Software Project",
+    "github": "https://codeberg.org/yosskavo/.profile",
+    "created_at": "2026-06-22",
+    "updated_at": "2026-07-23",
+    "language": ""
+  },
+  {
+    "id": "webserv",
+    "title": "webserv",
+    "repo_folder": "webserv",
+    "description": "Project repository for webserv.",
+    "tech": "C++",
+    "github": "https://codeberg.org/yosskavo/webserv",
+    "created_at": "2026-06-24",
+    "updated_at": "2026-06-24",
+    "language": "C++"
+  },
+  {
+    "id": "my-config",
+    "title": "my-config",
+    "repo_folder": "my-config",
+    "description": "Project repository for my-config.",
+    "tech": "CSS",
+    "github": "https://codeberg.org/yosskavo/my-config",
+    "created_at": "2026-06-29",
+    "updated_at": "2026-07-29",
+    "language": "CSS"
+  },
+  {
+    "id": "pages",
+    "title": "pages",
+    "repo_folder": "pages",
+    "description": "Project repository for pages.",
+    "tech": "HTML",
+    "github": "https://codeberg.org/yosskavo/pages",
+    "created_at": "2026-08-03",
+    "updated_at": "2026-08-03",
+    "language": "HTML"
+  }
+]
