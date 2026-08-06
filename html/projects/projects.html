@@ -96,7 +96,7 @@
             container.innerHTML = filtered.map(project => `
                 <article class="project-card">
                     <div class="card-header-block">
-                        <h3>${project.repo_folder ? `<a href="view.html?repo=${project.repo_folder}">${project.title}</a>` : project.title}</h3>
+                        <h3>${project.title}</h3>
                         ${project.created_at ? `<div class="date-badge">${project.created_at}</div>` : ''}
                     </div>
                     <p>${project.description}</p>

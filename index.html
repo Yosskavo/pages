@@ -77,10 +77,16 @@
                 if (recent) {
                     container.innerHTML = `
                         <article class="project-card">
-                            <h3>${recent.repo_folder ? `<a href="html/projects/view.html?repo=${recent.repo_folder}">${recent.title}</a>` : recent.title}</h3>
+                            <div class="card-header-block">
+                                <h3>${recent.title}</h3>
+                                ${recent.created_at ? `<div class="date-badge">${recent.created_at}</div>` : ''}
+                            </div>
                             <p>${recent.description}</p>
                             ${recent.tech ? `<ul><li><strong>Tech:</strong> ${recent.tech}</li></ul>` : ''}
-                            ${recent.github ? `<a href="${recent.github}" target="_blank">View Source Code</a>` : ''}
+                            <div class="card-footer-stacked">
+                                ${recent.github ? `<a href="${recent.github}" target="_blank" class="source-link">View Source Code</a>` : ''}
+                                ${recent.repo_folder ? `<a href="html/projects/view.html?repo=${recent.repo_folder}" class="doc-link">View Documentation (.md) &rarr;</a>` : ''}
+                            </div>
                         </article>
                     `;
                 }
@@ -95,9 +101,14 @@
                 if (nextGoal) {
                     container.innerHTML = `
                         <article class="project-card">
-                            <h3>${nextGoal.title}</h3>
+                            <div class="card-header-block">
+                                <h3>${nextGoal.title}</h3>
+                            </div>
                             <p>${nextGoal.description}</p>
                             ${nextGoal.tech ? `<ul><li><strong>Tech:</strong> ${nextGoal.tech}</li></ul>` : ''}
+                            <div class="card-footer-stacked">
+                                <a href="html/random/goals.html" class="see-all-link">See next goals &rarr;</a>
+                            </div>
                         </article>
                     `;
                 }
