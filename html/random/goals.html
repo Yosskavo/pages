@@ -90,9 +90,6 @@
                     <article class="project-card">
                         <div class="card-header-block">
                             <h3>${goal.title}</h3>
-                            <div class="goal-status-wrapper">
-                                <span class="status-pill status-${statusClass}">${goal.status}</span>
-                            </div>
                         </div>
                         <p>${goal.description}</p>
                         <ul>
@@ -100,6 +97,9 @@
                             ${goal.domain ? `<li><strong>Domain:</strong> ${goal.domain}</li>` : ''}
                         </ul>
                         <div class="card-footer-stacked">
+                            <div class="goal-status-wrapper">
+                                <span class="status-pill status-${statusClass}">${goal.status}</span>
+                            </div>
                             ${goal.target_date ? `<span class="target-date">Target Date: <strong>${goal.target_date}</strong></span>` : ''}
                         </div>
                     </article>
