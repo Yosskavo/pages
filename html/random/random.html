@@ -25,52 +25,46 @@
         <p>Explore music album reviews, technical topic notes, and future development goals:</p>
 
         <!-- Album Reviews Card -->
-        <article class="project-card">
-            <div class="card-header-block">
+        <article class="project-card text-left">
+            <div class="card-header-left">
                 <h3>Album Reviews</h3>
             </div>
             <p>Personal reviews, highlights, and ratings of my favorite music albums.</p>
-            <ul>
+            <ul class="card-details-list">
                 <li><strong>Count:</strong> <span id="album-count">Loading...</span></li>
+                <li id="album-latest-line"><strong>Latest:</strong> Loading...</li>
             </ul>
-            <div id="album-preview-block" class="preview-block">
-                <!-- Preview loaded from data/albums.json -->
-            </div>
-            <div class="card-footer-stacked">
+            <div class="card-footer-left">
                 <a href="albums.html" class="see-all-link">Browse Album Reviews &rarr;</a>
             </div>
         </article>
 
         <!-- Topics Card -->
-        <article class="project-card">
-            <div class="card-header-block">
+        <article class="project-card text-left">
+            <div class="card-header-left">
                 <h3>Topics &amp; Notes</h3>
             </div>
             <p>Notes on low-level systems programming, Unix environments, and developer tooling.</p>
-            <ul>
+            <ul class="card-details-list">
                 <li><strong>Count:</strong> <span id="topic-count">Loading...</span></li>
+                <li id="topic-latest-line"><strong>Latest:</strong> Loading...</li>
             </ul>
-            <div id="topic-preview-block" class="preview-block">
-                <!-- Preview loaded from data/topics.json -->
-            </div>
-            <div class="card-footer-stacked">
+            <div class="card-footer-left">
                 <a href="topics.html" class="see-all-link">Browse Topics &rarr;</a>
             </div>
         </article>
 
         <!-- Next Goals Card -->
-        <article class="project-card">
-            <div class="card-header-block">
+        <article class="project-card text-left">
+            <div class="card-header-left">
                 <h3>Next Goals &amp; Roadmap</h3>
             </div>
             <p>Roadmap, upcoming 1337 school projects, and technologies I'm diving into.</p>
-            <ul>
+            <ul class="card-details-list">
                 <li><strong>Count:</strong> <span id="goal-count">Loading...</span></li>
+                <li id="goal-latest-line"><strong>Latest:</strong> Loading...</li>
             </ul>
-            <div id="goal-preview-block" class="preview-block">
-                <!-- Preview loaded from data/goals.json -->
-            </div>
-            <div class="card-footer-stacked">
+            <div class="card-footer-left">
                 <a href="goals.html" class="see-all-link">Browse Roadmap &rarr;</a>
             </div>
         </article>
@@ -81,48 +75,45 @@
         fetch('../../data/albums.json')
             .then(res => res.json())
             .then(albums => {
-                document.getElementById('album-count').textContent = `${albums.length} Album Reviews`;
+                document.getElementById('album-count').textContent = `${albums.length}`;
                 if (albums.length > 0) {
                     const latest = albums[0];
-                    document.getElementById('album-preview-block').innerHTML = `
-                        <p class="preview-text"><strong>Latest Review:</strong> ${latest.title} by ${latest.artist} (${latest.rating})</p>
-                    `;
+                    document.getElementById('album-latest-line').innerHTML = `<strong>Latest:</strong> ${latest.title} by ${latest.artist} (${latest.rating})`;
                 }
             })
             .catch(err => {
-                document.getElementById('album-count').textContent = '0 Album Reviews';
+                document.getElementById('album-count').textContent = '0';
+                document.getElementById('album-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
 
         // Fetch Topics Data & Count
         fetch('../../data/topics.json')
             .then(res => res.json())
             .then(topics => {
-                document.getElementById('topic-count').textContent = `${topics.length} Topic Notes`;
+                document.getElementById('topic-count').textContent = `${topics.length}`;
                 if (topics.length > 0) {
                     const latest = topics[0];
-                    document.getElementById('topic-preview-block').innerHTML = `
-                        <p class="preview-text"><strong>Latest Topic:</strong> ${latest.title} - ${latest.summary}</p>
-                    `;
+                    document.getElementById('topic-latest-line').innerHTML = `<strong>Latest:</strong> ${latest.title}`;
                 }
             })
             .catch(err => {
-                document.getElementById('topic-count').textContent = '0 Topic Notes';
+                document.getElementById('topic-count').textContent = '0';
+                document.getElementById('topic-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
 
         // Fetch Goals Data & Count
         fetch('../../data/goals.json')
             .then(res => res.json())
             .then(goals => {
-                document.getElementById('goal-count').textContent = `${goals.length} Active Goals`;
+                document.getElementById('goal-count').textContent = `${goals.length}`;
                 if (goals.length > 0) {
                     const active = goals.find(g => g.status === 'In Progress') || goals[0];
-                    document.getElementById('goal-preview-block').innerHTML = `
-                        <p class="preview-text"><strong>Current Focus:</strong> ${active.title} (${active.status})</p>
-                    `;
+                    document.getElementById('goal-latest-line').innerHTML = `<strong>Latest:</strong> ${active.title} (${active.status})`;
                 }
             })
             .catch(err => {
-                document.getElementById('goal-count').textContent = '0 Active Goals';
+                document.getElementById('goal-count').textContent = '0';
+                document.getElementById('goal-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
     </script>
 </body>
