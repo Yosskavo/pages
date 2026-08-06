@@ -21,12 +21,21 @@
     </nav>
 
     <section id="goals">
-        <h2>Next Goals</h2>
-        <p>Current roadmap, upcoming projects, and technologies I'm diving into:</p>
+        <h2>Next Goals &amp; Roadmap</h2>
+        <p>Current roadmap, upcoming 1337 school projects, and technologies I'm diving into:</p>
 
-        <!-- Search & Sort Controls Bar -->
+        <!-- Search, Filter & Sort Controls Bar -->
         <div class="controls-bar">
-            <input type="text" id="search-input" placeholder="Search goals by title or description..." class="search-input">
+            <input type="text" id="search-input" placeholder="Search goals by title, description, or tech..." class="search-input">
+            
+            <select id="filter-select" class="sort-select">
+                <option value="all">Filter: All Statuses</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Planned">Planned</option>
+                <option value="Exploring">Exploring</option>
+                <option value="Future Research">Future Research</option>
+            </select>
+
             <select id="sort-select" class="sort-select">
                 <option value="default">Sort: Default</option>
                 <option value="az">Title: A to Z</option>
@@ -46,14 +55,22 @@
 
         function renderGoals() {
             const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const filterVal = document.getElementById('filter-select').value;
             const sortVal = document.getElementById('sort-select').value;
             const container = document.getElementById('goals-container');
 
             let filtered = allGoals.filter(g => {
                 const title = (g.title || '').toLowerCase();
                 const desc = (g.description || '').toLowerCase();
-                const status = (g.status || '').toLowerCase();
-                return title.includes(query) || desc.includes(query) || status.includes(query);
+                const tech = (g.tech || '').toLowerCase();
+                const category = (g.category || '').toLowerCase();
+                const matchesQuery = title.includes(query) || desc.includes(query) || tech.includes(query) || category.includes(query);
+                if (!matchesQuery) return false;
+
+                if (filterVal !== 'all') {
+                    return g.status === filterVal;
+                }
+                return true;
             });
 
             if (sortVal === 'az') {
@@ -67,13 +84,25 @@
                 return;
             }
 
-            container.innerHTML = filtered.map(goal => `
-                <article class="project-card">
-                    <h3>${goal.title}</h3>
-                    <p>${goal.description}</p>
-                    <p><strong>Status:</strong> ${goal.status} ${goal.target_date ? `(${goal.target_date})` : ''}</p>
-                </article>
-            `).join('');
+            container.innerHTML = filtered.map(goal => {
+                const statusClass = goal.status.toLowerCase().replace(/\s+/g, '-');
+                return `
+                    <article class="project-card">
+                        <div class="card-header-block">
+                            <h3>${goal.title}</h3>
+                            <div class="goal-badges">
+                                <span class="status-pill status-${statusClass}">${goal.status}</span>
+                                ${goal.category ? `<span class="category-badge">${goal.category}</span>` : ''}
+                            </div>
+                        </div>
+                        <p>${goal.description}</p>
+                        ${goal.tech ? `<ul><li><strong>Tech &amp; Concepts:</strong> ${goal.tech}</li></ul>` : ''}
+                        <div class="card-footer-stacked">
+                            ${goal.target_date ? `<span class="target-date">Target Date: <strong>${goal.target_date}</strong></span>` : ''}
+                        </div>
+                    </article>
+                `;
+            }).join('');
         }
 
         fetch('../../data/goals.json')
@@ -87,6 +116,7 @@
             });
 
         document.getElementById('search-input').addEventListener('input', renderGoals);
+        document.getElementById('filter-select').addEventListener('change', renderGoals);
         document.getElementById('sort-select').addEventListener('change', renderGoals);
     </script>
 </body>

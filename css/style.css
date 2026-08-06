@@ -481,3 +481,61 @@ h1 {
     color: var(--tokyo-green);
     font-weight: bold;
 }
+
+/* ========================================= */
+/* Next Goals Roadmap Styling                */
+/* ========================================= */
+
+.goal-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.status-pill {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-in-progress {
+    background-color: rgba(158, 206, 106, 0.2);
+    color: var(--tokyo-green);
+    border: 1px solid var(--tokyo-green);
+}
+
+.status-planned {
+    background-color: rgba(187, 154, 247, 0.2);
+    color: var(--tokyo-purple);
+    border: 1px solid var(--tokyo-purple);
+}
+
+.status-exploring {
+    background-color: rgba(125, 207, 255, 0.2);
+    color: var(--tokyo-cyan);
+    border: 1px solid var(--tokyo-cyan);
+}
+
+.status-future-research {
+    background-color: rgba(255, 158, 100, 0.2);
+    color: var(--tokyo-orange);
+    border: 1px solid var(--tokyo-orange);
+}
+
+.category-badge {
+    background-color: var(--tokyo-bg);
+    border: 1px solid var(--tokyo-border);
+    color: var(--tokyo-text);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.target-date {
+    color: var(--tokyo-purple);
+    font-size: 0.85rem;
+    font-family: monospace;
+}
