@@ -41,6 +41,19 @@
             <li><strong>Environment:</strong> Neovim, Kitty Terminal</li>
             <li><strong>Currently Exploring:</strong> Odin &amp; Go</li>
         </ul>
+
+        <!-- Git Signature & Activity Block -->
+        <article class="git-signature-card">
+            <div class="git-sig-header">
+                <span class="git-sig-label">Git Signature &amp; Status</span>
+                <span class="git-status-dot"></span>
+            </div>
+            <div class="git-sig-body">
+                <p><strong>Identity:</strong> Yosskavo (yel-mota)</p>
+                <p><strong>Profile:</strong> <a href="https://github.com/Yosskavo" target="_blank" rel="noopener">github.com/Yosskavo</a></p>
+                <p><strong>Latest Activity:</strong> <span id="git-latest-commit">Loading Git activity...</span></p>
+            </div>
+        </article>
     </section>
 
     <!-- Recent Project Section -->
@@ -68,6 +81,24 @@
     </section>
 
     <script>
+        // Fetch Git Signature & Activity
+        fetch('https://api.github.com/repos/Yosskavo/pages/commits?per_page=1')
+            .then(res => res.json())
+            .then(commits => {
+                const el = document.getElementById('git-latest-commit');
+                if (Array.isArray(commits) && commits.length > 0) {
+                    const commit = commits[0];
+                    const msg = commit.commit.message;
+                    const date = (commit.commit.author.date || '').slice(0, 10);
+                    el.innerHTML = `<code>${msg}</code> <span class="date-badge">(${date})</span>`;
+                } else {
+                    el.textContent = 'Active developer profile (github.com/Yosskavo)';
+                }
+            })
+            .catch(err => {
+                document.getElementById('git-latest-commit').textContent = 'Active developer profile (github.com/Yosskavo)';
+            });
+
         // Load Recent Project dynamically from data/projects.json
         fetch('data/projects.json')
             .then(res => res.json())

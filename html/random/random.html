@@ -21,23 +21,109 @@
     </nav>
 
     <section id="random">
-        <h2>Random</h2>
-        <p>A place for new things, album reviews, topics, and next goals:</p>
+        <h2>Random Hub</h2>
+        <p>Explore music album reviews, technical topic notes, and future development goals:</p>
 
+        <!-- Album Reviews Card -->
         <article class="project-card">
-            <h3><a href="albums.html">Album Reviews</a></h3>
-            <p>Personal album reviews, music highlights, and recommendations.</p>
+            <div class="card-header-block">
+                <h3>Album Reviews</h3>
+                <div class="goal-status-wrapper">
+                    <span id="album-count-badge" class="status-pill status-exploring">Loading...</span>
+                </div>
+            </div>
+            <p>Personal reviews, highlights, and ratings of my favorite music albums.</p>
+            <div id="album-preview-block" class="preview-block">
+                <!-- Preview loaded from data/albums.json -->
+            </div>
+            <div class="card-footer-stacked">
+                <a href="albums.html" class="see-all-link">Browse Album Reviews &rarr;</a>
+            </div>
         </article>
 
+        <!-- Topics Card -->
         <article class="project-card">
-            <h3><a href="topics.html">Topics</a></h3>
-            <p>Notes on low-level systems programming, Unix, and toolings.</p>
+            <div class="card-header-block">
+                <h3>Topics &amp; Notes</h3>
+                <div class="goal-status-wrapper">
+                    <span id="topic-count-badge" class="status-pill status-planned">Loading...</span>
+                </div>
+            </div>
+            <p>Notes on low-level systems programming, Unix environments, and developer tooling.</p>
+            <div id="topic-preview-block" class="preview-block">
+                <!-- Preview loaded from data/topics.json -->
+            </div>
+            <div class="card-footer-stacked">
+                <a href="topics.html" class="see-all-link">Browse Topics &rarr;</a>
+            </div>
         </article>
 
+        <!-- Next Goals Card -->
         <article class="project-card">
-            <h3><a href="goals.html">Next Goals</a></h3>
-            <p>Exploring Go, Odin, custom web servers, and low-level tools.</p>
+            <div class="card-header-block">
+                <h3>Next Goals &amp; Roadmap</h3>
+                <div class="goal-status-wrapper">
+                    <span id="goal-count-badge" class="status-pill status-in-progress">Loading...</span>
+                </div>
+            </div>
+            <p>Roadmap, upcoming 1337 school projects, and technologies I'm diving into.</p>
+            <div id="goal-preview-block" class="preview-block">
+                <!-- Preview loaded from data/goals.json -->
+            </div>
+            <div class="card-footer-stacked">
+                <a href="goals.html" class="see-all-link">Browse Roadmap &rarr;</a>
+            </div>
         </article>
     </section>
+
+    <script>
+        // Fetch Albums Data & Count
+        fetch('../../data/albums.json')
+            .then(res => res.json())
+            .then(albums => {
+                document.getElementById('album-count-badge').textContent = `${albums.length} Album Reviews`;
+                if (albums.length > 0) {
+                    const latest = albums[0];
+                    document.getElementById('album-preview-block').innerHTML = `
+                        <p class="preview-text"><strong>Latest Review:</strong> ${latest.title} by ${latest.artist} (${latest.rating})</p>
+                    `;
+                }
+            })
+            .catch(err => {
+                document.getElementById('album-count-badge').textContent = 'Album Reviews';
+            });
+
+        // Fetch Topics Data & Count
+        fetch('../../data/topics.json')
+            .then(res => res.json())
+            .then(topics => {
+                document.getElementById('topic-count-badge').textContent = `${topics.length} Topic Notes`;
+                if (topics.length > 0) {
+                    const latest = topics[0];
+                    document.getElementById('topic-preview-block').innerHTML = `
+                        <p class="preview-text"><strong>Latest Topic:</strong> ${latest.title} - ${latest.summary}</p>
+                    `;
+                }
+            })
+            .catch(err => {
+                document.getElementById('topic-count-badge').textContent = 'Topic Notes';
+            });
+
+        // Fetch Goals Data & Count
+        fetch('../../data/goals.json')
+            .then(res => res.json())
+            .then(goals => {
+                document.getElementById('goal-count-badge').textContent = `${goals.length} Active Goals`;
+                if (goals.length > 0) {
+                    const active = goals.find(g => g.status === 'In Progress') || goals[0];
+                    document.getElementById('goal-preview-block').innerHTML = `
+                        <p class="preview-text"><strong>Current Focus:</strong> ${active.title} (${active.status})</p>
+                    `;
+                }
+            })
+            .catch(err => {
+                document.getElementById('goal-count-badge').textContent = 'Next Goals';
+            });
+    </script>
 </body>
 </html>

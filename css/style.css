@@ -529,3 +529,66 @@ h1 {
     font-size: 0.85rem;
     font-family: monospace;
 }
+
+/* ========================================= */
+/* Git Signature & Status Card               */
+/* ========================================= */
+
+.git-signature-card {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 25px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.git-sig-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.git-sig-label {
+    color: var(--tokyo-cyan);
+    font-weight: bold;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.git-status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--tokyo-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--tokyo-green);
+}
+
+.git-sig-body p {
+    margin: 6px 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ========================================= */
+/* Hub Preview Block Styling                 */
+/* ========================================= */
+
+.preview-block {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 14px 0;
+    text-align: left;
+}
+
+.preview-text {
+    font-size: 0.88rem;
+    color: var(--tokyo-text);
+    margin: 0;
+    line-height: 1.5;
+}
