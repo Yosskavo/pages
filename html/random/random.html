@@ -28,11 +28,11 @@
         <article class="project-card">
             <div class="card-header-block">
                 <h3>Album Reviews</h3>
-                <div class="goal-status-wrapper">
-                    <span id="album-count-badge" class="status-pill status-exploring">Loading...</span>
-                </div>
             </div>
             <p>Personal reviews, highlights, and ratings of my favorite music albums.</p>
+            <ul>
+                <li><strong>Count:</strong> <span id="album-count">Loading...</span></li>
+            </ul>
             <div id="album-preview-block" class="preview-block">
                 <!-- Preview loaded from data/albums.json -->
             </div>
@@ -45,11 +45,11 @@
         <article class="project-card">
             <div class="card-header-block">
                 <h3>Topics &amp; Notes</h3>
-                <div class="goal-status-wrapper">
-                    <span id="topic-count-badge" class="status-pill status-planned">Loading...</span>
-                </div>
             </div>
             <p>Notes on low-level systems programming, Unix environments, and developer tooling.</p>
+            <ul>
+                <li><strong>Count:</strong> <span id="topic-count">Loading...</span></li>
+            </ul>
             <div id="topic-preview-block" class="preview-block">
                 <!-- Preview loaded from data/topics.json -->
             </div>
@@ -62,11 +62,11 @@
         <article class="project-card">
             <div class="card-header-block">
                 <h3>Next Goals &amp; Roadmap</h3>
-                <div class="goal-status-wrapper">
-                    <span id="goal-count-badge" class="status-pill status-in-progress">Loading...</span>
-                </div>
             </div>
             <p>Roadmap, upcoming 1337 school projects, and technologies I'm diving into.</p>
+            <ul>
+                <li><strong>Count:</strong> <span id="goal-count">Loading...</span></li>
+            </ul>
             <div id="goal-preview-block" class="preview-block">
                 <!-- Preview loaded from data/goals.json -->
             </div>
@@ -81,7 +81,7 @@
         fetch('../../data/albums.json')
             .then(res => res.json())
             .then(albums => {
-                document.getElementById('album-count-badge').textContent = `${albums.length} Album Reviews`;
+                document.getElementById('album-count').textContent = `${albums.length} Album Reviews`;
                 if (albums.length > 0) {
                     const latest = albums[0];
                     document.getElementById('album-preview-block').innerHTML = `
@@ -90,14 +90,14 @@
                 }
             })
             .catch(err => {
-                document.getElementById('album-count-badge').textContent = 'Album Reviews';
+                document.getElementById('album-count').textContent = '0 Album Reviews';
             });
 
         // Fetch Topics Data & Count
         fetch('../../data/topics.json')
             .then(res => res.json())
             .then(topics => {
-                document.getElementById('topic-count-badge').textContent = `${topics.length} Topic Notes`;
+                document.getElementById('topic-count').textContent = `${topics.length} Topic Notes`;
                 if (topics.length > 0) {
                     const latest = topics[0];
                     document.getElementById('topic-preview-block').innerHTML = `
@@ -106,14 +106,14 @@
                 }
             })
             .catch(err => {
-                document.getElementById('topic-count-badge').textContent = 'Topic Notes';
+                document.getElementById('topic-count').textContent = '0 Topic Notes';
             });
 
         // Fetch Goals Data & Count
         fetch('../../data/goals.json')
             .then(res => res.json())
             .then(goals => {
-                document.getElementById('goal-count-badge').textContent = `${goals.length} Active Goals`;
+                document.getElementById('goal-count').textContent = `${goals.length} Active Goals`;
                 if (goals.length > 0) {
                     const active = goals.find(g => g.status === 'In Progress') || goals[0];
                     document.getElementById('goal-preview-block').innerHTML = `
@@ -122,7 +122,7 @@
                 }
             })
             .catch(err => {
-                document.getElementById('goal-count-badge').textContent = 'Next Goals';
+                document.getElementById('goal-count').textContent = '0 Active Goals';
             });
     </script>
 </body>
