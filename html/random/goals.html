@@ -63,8 +63,8 @@
                 const title = (g.title || '').toLowerCase();
                 const desc = (g.description || '').toLowerCase();
                 const tech = (g.tech || '').toLowerCase();
-                const category = (g.category || '').toLowerCase();
-                const matchesQuery = title.includes(query) || desc.includes(query) || tech.includes(query) || category.includes(query);
+                const domain = (g.domain || '').toLowerCase();
+                const matchesQuery = title.includes(query) || desc.includes(query) || tech.includes(query) || domain.includes(query);
                 if (!matchesQuery) return false;
 
                 if (filterVal !== 'all') {
@@ -92,11 +92,13 @@
                             <h3>${goal.title}</h3>
                             <div class="goal-badges">
                                 <span class="status-pill status-${statusClass}">${goal.status}</span>
-                                ${goal.category ? `<span class="category-badge">${goal.category}</span>` : ''}
                             </div>
                         </div>
                         <p>${goal.description}</p>
-                        ${goal.tech ? `<ul><li><strong>Tech &amp; Concepts:</strong> ${goal.tech}</li></ul>` : ''}
+                        <ul>
+                            ${goal.tech ? `<li><strong>Tech:</strong> ${goal.tech}</li>` : ''}
+                            ${goal.domain ? `<li><strong>Domain:</strong> ${goal.domain}</li>` : ''}
+                        </ul>
                         <div class="card-footer-stacked">
                             ${goal.target_date ? `<span class="target-date">Target Date: <strong>${goal.target_date}</strong></span>` : ''}
                         </div>
