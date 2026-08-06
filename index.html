@@ -41,17 +41,32 @@
             <li><strong>Environment:</strong> Neovim, Kitty Terminal</li>
             <li><strong>Currently Exploring:</strong> Odin &amp; Go</li>
         </ul>
+    </section>
 
-        <!-- Git Signature & Activity Block -->
+    <!-- Git Signature Section -->
+    <section id="git-signature">
+        <div class="section-header">
+            <h2>Git Signature</h2>
+        </div>
+
         <article class="git-signature-card">
             <div class="git-sig-header">
-                <span class="git-sig-label">Git Signature &amp; Status</span>
+                <span class="git-sig-label">Developer Activity &amp; Status</span>
                 <span class="git-status-dot"></span>
             </div>
-            <div class="git-sig-body">
+
+            <div class="git-sig-stats">
                 <p><strong>Identity:</strong> Yosskavo (yel-mota)</p>
-                <p><strong>Profile:</strong> <a href="https://github.com/Yosskavo" target="_blank" rel="noopener">github.com/Yosskavo</a></p>
-                <p><strong>Latest Activity:</strong> <span id="git-latest-commit">Loading Git activity...</span></p>
+                <p><strong>Public Repositories:</strong> <span id="git-total-repos">28 Public Repositories</span></p>
+                <p><strong>Latest Commit:</strong> <span id="git-latest-commit">Loading Git activity...</span></p>
+            </div>
+
+            <div class="git-sig-footer">
+                <p><strong>Profiles:</strong></p>
+                <div class="social-links git-profiles-links">
+                    <a href="https://github.com/Yosskavo" target="_blank" rel="noopener">GitHub (Yosskavo)</a>
+                    <a href="https://codeberg.org/Yosskavo" target="_blank" rel="noopener">Codeberg (Yosskavo)</a>
+                </div>
             </div>
         </article>
     </section>
@@ -81,6 +96,18 @@
     </section>
 
     <script>
+        // Fetch Git Profile Stats
+        fetch('https://api.github.com/users/Yosskavo')
+            .then(res => res.json())
+            .then(userData => {
+                if (userData && userData.public_repos) {
+                    document.getElementById('git-total-repos').textContent = `${userData.public_repos} Public Repositories`;
+                }
+            })
+            .catch(err => {
+                document.getElementById('git-total-repos').textContent = '28 Public Repositories';
+            });
+
         // Fetch Git Signature & Activity
         fetch('https://api.github.com/repos/Yosskavo/pages/commits?per_page=1')
             .then(res => res.json())
@@ -92,11 +119,11 @@
                     const date = (commit.commit.author.date || '').slice(0, 10);
                     el.innerHTML = `<code>${msg}</code> <span class="date-badge">(${date})</span>`;
                 } else {
-                    el.textContent = 'Active developer profile (github.com/Yosskavo)';
+                    el.textContent = 'Active Developer Profile';
                 }
             })
             .catch(err => {
-                document.getElementById('git-latest-commit').textContent = 'Active developer profile (github.com/Yosskavo)';
+                document.getElementById('git-latest-commit').textContent = 'Active Developer Profile';
             });
 
         // Load Recent Project dynamically from data/projects.json
