@@ -486,52 +486,43 @@ h1 {
 /* Next Goals Roadmap Styling                */
 /* ========================================= */
 
-.goal-badges {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+.goal-status-wrapper {
     margin-top: 6px;
-    flex-wrap: wrap;
+    margin-bottom: 4px;
+    text-align: center;
 }
 
 .status-pill {
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .status-in-progress {
-    background-color: rgba(158, 206, 106, 0.2);
+    background-color: rgba(158, 206, 106, 0.15);
     color: var(--tokyo-green);
-    border: 1px solid var(--tokyo-green);
+    border: 1px solid rgba(158, 206, 106, 0.4);
 }
 
 .status-planned {
-    background-color: rgba(187, 154, 247, 0.2);
+    background-color: rgba(187, 154, 247, 0.15);
     color: var(--tokyo-purple);
-    border: 1px solid var(--tokyo-purple);
+    border: 1px solid rgba(187, 154, 247, 0.4);
 }
 
 .status-exploring {
-    background-color: rgba(125, 207, 255, 0.2);
+    background-color: rgba(125, 207, 255, 0.15);
     color: var(--tokyo-cyan);
-    border: 1px solid var(--tokyo-cyan);
+    border: 1px solid rgba(125, 207, 255, 0.4);
 }
 
 .status-future-research {
-    background-color: rgba(255, 158, 100, 0.2);
+    background-color: rgba(255, 158, 100, 0.15);
     color: var(--tokyo-orange);
-    border: 1px solid var(--tokyo-orange);
-}
-
-.category-badge {
-    background-color: var(--tokyo-bg);
-    border: 1px solid var(--tokyo-border);
-    color: var(--tokyo-text);
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
+    border: 1px solid rgba(255, 158, 100, 0.4);
 }
 
 .target-date {
