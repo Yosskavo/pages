@@ -58,6 +58,7 @@
             <div class="git-sig-stats">
                 <p><strong>Identity:</strong> Yosskavo (yel-mota)</p>
                 <p><strong>Public Repositories:</strong> <span id="git-total-repos">28 Public Repositories</span></p>
+                <p><strong>Total Commits:</strong> <span id="git-total-commits">207+ Commits</span></p>
                 <p><strong>Latest Commit:</strong> <span id="git-latest-commit">Loading Git activity...</span></p>
             </div>
 
@@ -96,7 +97,7 @@
     </section>
 
     <script>
-        // Fetch Git Profile Stats
+        // Fetch Git Profile Repos Count
         fetch('https://api.github.com/users/Yosskavo')
             .then(res => res.json())
             .then(userData => {
@@ -106,6 +107,20 @@
             })
             .catch(err => {
                 document.getElementById('git-total-repos').textContent = '28 Public Repositories';
+            });
+
+        // Fetch Total Commits Count
+        fetch('https://api.github.com/search/commits?q=author:Yosskavo', {
+            headers: { 'Accept': 'application/vnd.github.cloak-preview+json' }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data && typeof data.total_count === 'number' && data.total_count > 0) {
+                    document.getElementById('git-total-commits').textContent = `${data.total_count}+ Commits`;
+                }
+            })
+            .catch(err => {
+                document.getElementById('git-total-commits').textContent = '207+ Commits';
             });
 
         // Fetch Git Signature & Activity
