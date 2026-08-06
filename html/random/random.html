@@ -22,20 +22,20 @@
 
     <section id="random">
         <h2>Random Hub</h2>
-        <p>Explore music album reviews, technical topic notes, and future development goals:</p>
+        <p>Explore future development goals, technical topic notes, and music album reviews:</p>
 
-        <!-- Album Reviews Card -->
+        <!-- Next Goals Card -->
         <article class="project-card">
             <div class="card-header-block">
-                <h3>Album Reviews</h3>
+                <h3>Next Goals &amp; Roadmap</h3>
             </div>
-            <p>Personal reviews, highlights, and ratings of my favorite music albums.</p>
+            <p>Roadmap, upcoming 1337 school projects, and technologies I'm diving into.</p>
             <ul class="card-details-list">
-                <li><strong>Count:</strong> <span id="album-count">Loading...</span></li>
-                <li id="album-latest-line"><strong>Latest:</strong> Loading...</li>
+                <li><strong>Count:</strong> <span id="goal-count">Loading...</span></li>
+                <li id="goal-latest-line"><strong>Latest:</strong> Loading...</li>
             </ul>
             <div class="card-footer-stacked">
-                <a href="albums.html" class="see-all-link">Browse Album Reviews &rarr;</a>
+                <a href="goals.html" class="see-all-link">Browse Roadmap &rarr;</a>
             </div>
         </article>
 
@@ -54,36 +54,36 @@
             </div>
         </article>
 
-        <!-- Next Goals Card -->
+        <!-- Album Reviews Card -->
         <article class="project-card">
             <div class="card-header-block">
-                <h3>Next Goals &amp; Roadmap</h3>
+                <h3>Album Reviews</h3>
             </div>
-            <p>Roadmap, upcoming 1337 school projects, and technologies I'm diving into.</p>
+            <p>Personal reviews, highlights, and ratings of my favorite music albums.</p>
             <ul class="card-details-list">
-                <li><strong>Count:</strong> <span id="goal-count">Loading...</span></li>
-                <li id="goal-latest-line"><strong>Latest:</strong> Loading...</li>
+                <li><strong>Count:</strong> <span id="album-count">Loading...</span></li>
+                <li id="album-latest-line"><strong>Latest:</strong> Loading...</li>
             </ul>
             <div class="card-footer-stacked">
-                <a href="goals.html" class="see-all-link">Browse Roadmap &rarr;</a>
+                <a href="albums.html" class="see-all-link">Browse Album Reviews &rarr;</a>
             </div>
         </article>
     </section>
 
     <script>
-        // Fetch Albums Data & Count
-        fetch('../../data/albums.json')
+        // Fetch Goals Data & Count
+        fetch('../../data/goals.json')
             .then(res => res.json())
-            .then(albums => {
-                document.getElementById('album-count').textContent = `${albums.length}`;
-                if (albums.length > 0) {
-                    const latest = albums[0];
-                    document.getElementById('album-latest-line').innerHTML = `<strong>Latest:</strong> ${latest.title} by ${latest.artist} (${latest.rating})`;
+            .then(goals => {
+                document.getElementById('goal-count').textContent = `${goals.length}`;
+                if (goals.length > 0) {
+                    const active = goals.find(g => g.status === 'In Progress') || goals[0];
+                    document.getElementById('goal-latest-line').innerHTML = `<strong>Latest:</strong> ${active.title} (${active.status})`;
                 }
             })
             .catch(err => {
-                document.getElementById('album-count').textContent = '0';
-                document.getElementById('album-latest-line').innerHTML = '<strong>Latest:</strong> None';
+                document.getElementById('goal-count').textContent = '0';
+                document.getElementById('goal-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
 
         // Fetch Topics Data & Count
@@ -101,19 +101,19 @@
                 document.getElementById('topic-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
 
-        // Fetch Goals Data & Count
-        fetch('../../data/goals.json')
+        // Fetch Albums Data & Count
+        fetch('../../data/albums.json')
             .then(res => res.json())
-            .then(goals => {
-                document.getElementById('goal-count').textContent = `${goals.length}`;
-                if (goals.length > 0) {
-                    const active = goals.find(g => g.status === 'In Progress') || goals[0];
-                    document.getElementById('goal-latest-line').innerHTML = `<strong>Latest:</strong> ${active.title} (${active.status})`;
+            .then(albums => {
+                document.getElementById('album-count').textContent = `${albums.length}`;
+                if (albums.length > 0) {
+                    const latest = albums[0];
+                    document.getElementById('album-latest-line').innerHTML = `<strong>Latest:</strong> ${latest.title} by ${latest.artist} (${latest.rating})`;
                 }
             })
             .catch(err => {
-                document.getElementById('goal-count').textContent = '0';
-                document.getElementById('goal-latest-line').innerHTML = '<strong>Latest:</strong> None';
+                document.getElementById('album-count').textContent = '0';
+                document.getElementById('album-latest-line').innerHTML = '<strong>Latest:</strong> None';
             });
     </script>
 </body>
