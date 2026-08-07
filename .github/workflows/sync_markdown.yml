@@ -10,12 +10,18 @@ on:
       - master
       - Yami
 
+# Grant write permissions so the runner can push committed documentation updates
+permissions:
+  contents: write
+
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout portfolio repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
