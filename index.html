@@ -123,22 +123,43 @@
                 document.getElementById('git-total-commits').textContent = '207+ Commits';
             });
 
-        // Fetch Git Signature & Activity
-        fetch('https://api.github.com/repos/Yosskavo/pages/commits?per_page=1')
+        // Fetch Latest Commit across all public repositories with repository name
+        function fetchLatestPagesCommit() {
+            fetch('https://api.github.com/repos/Yosskavo/pages/commits?per_page=1')
+                .then(res => res.json())
+                .then(commits => {
+                    const el = document.getElementById('git-latest-commit');
+                    if (Array.isArray(commits) && commits.length > 0) {
+                        const commit = commits[0];
+                        const msg = commit.commit.message.split('\n')[0];
+                        const date = (commit.commit.author.date || '').slice(0, 10);
+                        el.innerHTML = `<strong>pages:</strong> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('git-latest-commit').textContent = 'Active Developer Profile';
+                });
+        }
+
+        fetch('https://api.github.com/users/Yosskavo/events/public')
             .then(res => res.json())
-            .then(commits => {
+            .then(events => {
                 const el = document.getElementById('git-latest-commit');
-                if (Array.isArray(commits) && commits.length > 0) {
-                    const commit = commits[0];
-                    const msg = commit.commit.message;
-                    const date = (commit.commit.author.date || '').slice(0, 10);
-                    el.innerHTML = `<code>${msg}</code> <span class="date-badge">(${date})</span>`;
-                } else {
-                    el.textContent = 'Active Developer Profile';
+                if (Array.isArray(events)) {
+                    const pushEvent = events.find(e => e.type === 'PushEvent' && e.payload && e.payload.commits && e.payload.commits.length > 0);
+                    if (pushEvent) {
+                        const repoName = pushEvent.repo.name.split('/').pop();
+                        const commit = pushEvent.payload.commits[pushEvent.payload.commits.length - 1];
+                        const msg = (commit.message || 'Updated repository').split('\n')[0];
+                        const date = (pushEvent.created_at || '').slice(0, 10);
+                        el.innerHTML = `<strong>${repoName}:</strong> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
+                        return;
+                    }
                 }
+                fetchLatestPagesCommit();
             })
             .catch(err => {
-                document.getElementById('git-latest-commit').textContent = 'Active Developer Profile';
+                fetchLatestPagesCommit();
             });
 
         // Load Recent Project dynamically from data/projects.json
