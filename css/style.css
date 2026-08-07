@@ -575,12 +575,12 @@ h1 {
 }
 
 .repo-badge {
-    background-color: rgba(122, 162, 247, 0.2);
-    color: var(--tokyo-blue);
-    border: 1px solid var(--tokyo-blue);
+    background-color: rgba(255, 158, 100, 0.15);
+    color: var(--tokyo-orange);
+    border: 1px solid rgba(255, 158, 100, 0.4);
     padding: 2px 8px;
     border-radius: 6px;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: bold;
     font-family: monospace;
     margin-right: 6px;

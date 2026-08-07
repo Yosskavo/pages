@@ -133,11 +133,11 @@
                         const commit = commits[0];
                         const msg = commit.commit.message.split('\n')[0];
                         const date = (commit.commit.author.date || '').slice(0, 10);
-                        el.innerHTML = `<span class="repo-badge">pages</span> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
+                        el.innerHTML = `<span class="repo-badge">pages:</span> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
                     }
                 })
                 .catch(err => {
-                    document.getElementById('git-latest-commit').innerHTML = `<span class="repo-badge">pages</span> Active Developer Profile`;
+                    document.getElementById('git-latest-commit').innerHTML = `<span class="repo-badge">pages:</span> Active Developer Profile`;
                 });
         }
 
@@ -152,7 +152,7 @@
                         const commit = pushEvent.payload.commits[pushEvent.payload.commits.length - 1];
                         const msg = (commit.message || 'Updated repository').split('\n')[0];
                         const date = (pushEvent.created_at || '').slice(0, 10);
-                        el.innerHTML = `<span class="repo-badge">${repoName}</span> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
+                        el.innerHTML = `<span class="repo-badge">${repoName}:</span> <code>${msg}</code> <span class="date-badge">(${date})</span>`;
                         return;
                     }
                 }
