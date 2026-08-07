@@ -575,16 +575,12 @@ h1 {
 }
 
 .repo-badge {
-    background-color: rgba(255, 158, 100, 0.15);
     color: var(--tokyo-orange);
-    border: 1px solid rgba(255, 158, 100, 0.4);
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.85rem;
     font-weight: bold;
-    font-family: monospace;
     margin-right: 6px;
-    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .git-sig-footer {
