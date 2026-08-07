@@ -1,5 +1,22 @@
 {
+  "Inception": [
+    "README.md",
+    "DEV_DOC.md",
+    "USER_DOC.md"
+  ],
   "minishell": [
+    "README.md"
+  ],
+  "net-practice": [
+    "README.md"
+  ],
+  "libft": [
+    "README.md"
+  ],
+  "spotify.nvim": [
+    "README.md"
+  ],
+  "shekai.nvim": [
     "README.md"
   ],
   "nvim": [
@@ -19,10 +36,13 @@
     "docs/tree.md",
     "docs/whichkey.md"
   ],
-  "Yosskavo": [
+  "my-zsh-theme": [
     "README.md"
   ],
-  "inverted": [
+  "neetcode-submissions": [
+    "README.md"
+  ],
+  "trust-system": [
     "README.md"
   ],
   "Stratex": [
@@ -36,38 +56,7 @@
     "tradingagents/README.md",
     "tradingagents/tradingagents/llm_clients/TODO.md"
   ],
-  "libft": [
-    "README.md"
-  ],
-  "trust-system": [
-    "README.md"
-  ],
-  "my-config": [
-    "README.md",
-    "my-zsh-theme/README.md",
-    "spicetify/CustomApps/marketplace/README.md"
-  ],
-  "net-practice": [
-    "README.md"
-  ],
-  "my-zsh-theme": [
-    "README.md"
-  ],
-  "shekai.nvim": [
-    "README.md"
-  ],
-  "spotify.nvim": [
-    "README.md"
-  ],
-  "Inception": [
-    "README.md",
-    "DEV_DOC.md",
-    "USER_DOC.md"
-  ],
-  ".profile": [
-    "README.md"
-  ],
-  "webserv": [
+  "inverted": [
     "README.md"
   ],
   "cpp-abo-hadhoud": [
@@ -76,7 +65,7 @@
   "Print_limits": [
     "README.md"
   ],
-  "neetcode-submissions": [
+  "Yosskavo": [
     "README.md"
   ]
 }
