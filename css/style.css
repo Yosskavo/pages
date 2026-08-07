@@ -574,6 +574,19 @@ h1 {
     line-height: 1.5;
 }
 
+.repo-badge {
+    background-color: rgba(122, 162, 247, 0.2);
+    color: var(--tokyo-blue);
+    border: 1px solid var(--tokyo-blue);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    font-family: monospace;
+    margin-right: 6px;
+    display: inline-block;
+}
+
 .git-sig-footer {
     margin-top: 15px;
     padding-top: 12px;
