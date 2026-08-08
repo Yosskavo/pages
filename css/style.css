@@ -649,6 +649,15 @@ h1 {
     flex-wrap: wrap;
 }
 
+.cv-actions-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
 /* ========================================= */
 /* Hub Preview Block Styling                 */
 /* ========================================= */
