@@ -80,6 +80,16 @@ body {
     text-decoration: underline;
 }
 
+.nav-github-badge {
+    color: var(--tokyo-orange) !important;
+    font-size: 0.88rem;
+}
+
+.nav-github-badge:hover {
+    color: var(--tokyo-purple) !important;
+    text-decoration: underline;
+}
+
 /* Section Header with See All Link */
 .section-header {
     display: flex;
@@ -597,6 +607,45 @@ h1 {
 .git-profiles-links {
     display: flex;
     gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ========================================= */
+/* Curriculum Vitae (CV) Styling             */
+/* ========================================= */
+
+.cv-card {
+    background-color: var(--tokyo-card);
+    border: 1px solid var(--tokyo-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cv-title {
+    color: var(--tokyo-cyan);
+    font-weight: bold;
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cv-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--tokyo-text);
+}
+
+.cv-actions {
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
