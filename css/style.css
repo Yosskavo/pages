@@ -693,6 +693,15 @@ h1 {
     text-decoration: underline;
 }
 
+.contact-social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
 /* ========================================= */
 /* Hub Preview Block Styling                 */
 /* ========================================= */
