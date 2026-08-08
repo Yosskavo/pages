@@ -101,6 +101,7 @@
                                 <span class="status-pill status-${statusClass}">${goal.status}</span>
                             </div>
                             ${goal.target_date ? `<span class="target-date">Target Date: <strong>${goal.target_date}</strong></span>` : ''}
+                            <a href="view_goal.html?goal=${goal.id}" class="doc-link" style="margin-top: 10px;">Read Goal Roadmap (.md) &rarr;</a>
                         </div>
                     </article>
                 `;

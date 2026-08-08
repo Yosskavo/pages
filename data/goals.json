@@ -1,52 +1,52 @@
 [
   {
     "id": "webserv",
-    "title": "webserv (HTTP/1.1 Web Server)",
+    "title": "webserv",
     "status": "In Progress",
-    "domain": "1337 School / Low Level",
-    "priority": "High",
-    "description": "An HTTP/1.1 web server written in C++98 from scratch, handling non-blocking sockets, I/O multiplexing (poll/select/epoll/kqueue), CGI execution, and Nginx-style config parsing.",
+    "description": "Building a fully non-blocking HTTP/1.1 web server in C++98, implementing poll/select multiplexing, Nginx-style configuration files, and CGI execution.",
     "tech": "C++98, Sockets, I/O Multiplexing, HTTP/1.1, CGI",
-    "target_date": "2026 Q3"
+    "domain": "1337 School / Low Level",
+    "target_date": "2026-09-30",
+    "markdown_file": "../../goals_markdown/webserv.md"
   },
   {
     "id": "golang-devops",
     "title": "Go (Golang) for DevOps & Cloud Systems",
-    "status": "Exploring",
-    "domain": "Personal / DevOps",
-    "priority": "High",
-    "description": "Mastering Go for DevOps tooling, microservices, CLI applications, Docker automation, and high-performance backend infrastructure.",
+    "status": "In Progress",
+    "description": "Mastering Go to develop high-speed cloud infrastructure tools, Docker automation, concurrency primitives with goroutines, and backend microservices.",
     "tech": "Go, DevOps, Microservices, Docker, CLI Tools",
-    "target_date": "2026 Q4"
+    "domain": "Personal / DevOps",
+    "target_date": "2026-11-15",
+    "markdown_file": "../../goals_markdown/golang-devops.md"
   },
   {
     "id": "odin-lang",
     "title": "Odin Programming Language",
-    "status": "Exploring",
-    "domain": "Personal / Low Level",
-    "priority": "Low",
-    "description": "Exploring Odin for low-level systems experimentation and custom memory allocation concepts.",
+    "status": "Planned",
+    "description": "Exploring the Odin language for fast, ergonomic systems programming with explicit memory management and zero hidden control flow.",
     "tech": "Odin, Systems Programming, Manual Memory Management",
-    "target_date": "2026 Q4"
+    "domain": "Personal / Low Level",
+    "target_date": "2026-12-01",
+    "markdown_file": "../../goals_markdown/odin-lang.md"
   },
   {
     "id": "transcendence",
-    "title": "ft_transcendence (Full-Stack Web Capstone)",
-    "status": "Planned",
-    "domain": "1337 School / Web Development",
-    "priority": "Medium",
-    "description": "Final 42 capstone project building a real-time multiplayer Pong platform with OAuth2 authentication, WebSockets, single-page navigation, and microservices.",
+    "title": "ft_transcendence",
+    "status": "Exploring",
+    "description": "Full-stack web application featuring real-time multiplayer Pong, live chat, secure OAuth2 authentication, and microservices architecture.",
     "tech": "WebSockets, Single-Page App, OAuth2, Microservices, PostgreSQL",
-    "target_date": "2027 Q1"
+    "domain": "1337 School / Web Development",
+    "target_date": "2026-12-30",
+    "markdown_file": "../../goals_markdown/transcendence.md"
   },
   {
     "id": "kernel-research",
-    "title": "Low-Level Kernel & Operating System Concepts",
+    "title": "Low-Level Kernel Concepts",
     "status": "Future Research",
-    "domain": "Personal / Low Level",
-    "priority": "Low",
-    "description": "Study x86 architecture bootloaders, virtual memory paging, system calls, and interrupt descriptor tables (IDT) for educational OS kernel experiments.",
+    "description": "Researching x86 architecture, CPU privilege levels (Ring 0/3), memory paging, virtual memory management, and interrupt handling.",
     "tech": "Assembly (x86), C, OS Development, Memory Paging",
-    "target_date": "2027"
+    "domain": "Personal / Low Level",
+    "target_date": "2027-02-28",
+    "markdown_file": "../../goals_markdown/kernel-research.md"
   }
 ]

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Roadmap | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <!-- Marked JS Parser for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="random.html" class="active">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="readme-viewer">
+        <div class="viewer-controls">
+            <!-- Goal File Selector in Top Left -->
+            <div class="file-selector-wrapper">
+                <label for="file-select" class="file-label">Roadmap Goal:</label>
+                <select id="file-select" class="file-select"></select>
+            </div>
+
+            <a href="goals.html" class="see-all-link">&larr; Back to Next Goals</a>
+        </div>
+
+        <div class="section-header">
+            <h2 id="goal-title">Goal Roadmap</h2>
+        </div>
+
+        <article class="readme-card" id="readme-content">
+            <p>Loading roadmap documentation...</p>
+        </article>
+
+        <p><a href="goals.html">&larr; Back to Next Goals</a></p>
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentGoalId = urlParams.get('goal') || 'webserv';
+        let allGoals = [];
+
+        const fileSelect = document.getElementById('file-select');
+        const readmeContent = document.getElementById('readme-content');
+        const goalTitle = document.getElementById('goal-title');
+
+        fetch('../../data/goals.json')
+            .then(res => res.json())
+            .then(goals => {
+                allGoals = goals;
+                fileSelect.innerHTML = goals.map(g => `
+                    <option value="${g.id}" ${g.id === currentGoalId ? 'selected' : ''}>${g.title}</option>
+                `).join('');
+
+                const active = allGoals.find(g => g.id === currentGoalId) || allGoals[0];
+                if (active) {
+                    fileSelect.value = active.id;
+                    loadMarkdown(active);
+                }
+            })
+            .catch(err => {
+                readmeContent.innerHTML = '<p>Could not load goals roadmap index.</p>';
+            });
+
+        function loadMarkdown(goalObj) {
+            if (!goalObj || !goalObj.markdown_file) {
+                readmeContent.innerHTML = '<p>Roadmap documentation file not found.</p>';
+                return;
+            }
+
+            goalTitle.textContent = goalObj.title;
+            document.title = `${goalObj.title} | Roadmap | Yosskavo`;
+
+            // Update URL without page reload
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.set('goal', goalObj.id);
+            window.history.replaceState({}, '', newUrl);
+
+            fetch(goalObj.markdown_file)
+                .then(res => {
+                    if (!res.ok) throw new Error('File not found');
+                    return res.text();
+                })
+                .then(mdText => {
+                    if (window.marked) {
+                        readmeContent.innerHTML = window.marked.parse(mdText);
+                    } else {
+                        readmeContent.innerHTML = '<pre>' + mdText + '</pre>';
+                    }
+                    attachLinkInterceptors();
+                })
+                .catch(err => {
+                    readmeContent.innerHTML = `<p>Roadmap note file is not available.</p>`;
+                });
+        }
+
+        function attachLinkInterceptors() {
+            const links = readmeContent.querySelectorAll('a');
+            links.forEach(a => {
+                const href = a.getAttribute('href');
+                if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+                    a.setAttribute('target', '_blank');
+                    a.setAttribute('rel', 'noopener');
+                }
+            });
+        }
+
+        fileSelect.addEventListener('change', (e) => {
+            currentGoalId = e.target.value;
+            const selected = allGoals.find(g => g.id === currentGoalId);
+            if (selected) {
+                loadMarkdown(selected);
+            }
+        });
+    </script>
+</body>
+</html>
