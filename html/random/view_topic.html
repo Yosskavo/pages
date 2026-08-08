@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topic Notes Viewer | Yosskavo</title>
+    <title>Topic Notes | Yosskavo</title>
 	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
     <link rel="stylesheet" href="../../css/style.css">
+    <!-- Marked JS Parser for Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
@@ -21,18 +22,26 @@
         </div>
     </nav>
 
-    <div class="viewer-top-bar">
-        <div class="viewer-selector-group">
-            <label for="topic-file-select" class="viewer-label">Topic Note:</label>
-            <select id="topic-file-select" class="viewer-select"></select>
-        </div>
-        <a href="topics.html" class="viewer-back-link">&larr; Back to Topics</a>
-    </div>
+    <section id="readme-viewer">
+        <div class="viewer-controls">
+            <!-- Topic File Selector in Top Left -->
+            <div class="file-selector-wrapper">
+                <label for="file-select" class="file-label">Topic Note:</label>
+                <select id="file-select" class="file-select"></select>
+            </div>
 
-    <section id="doc-viewer-container" class="doc-viewer-container">
-        <div id="doc-content" class="markdown-body">
-            <p>Loading topic notes...</p>
+            <a href="topics.html" class="see-all-link">&larr; Back to Topics</a>
         </div>
+
+        <div class="section-header">
+            <h2 id="topic-title">Topic Notes</h2>
+        </div>
+
+        <article class="readme-card" id="readme-content">
+            <p>Loading topic notes...</p>
+        </article>
+
+        <p><a href="topics.html">&larr; Back to Topics</a></p>
     </section>
 
     <script>
@@ -40,53 +49,78 @@
         let currentTopicId = urlParams.get('topic') || 'unix-processes-signals';
         let allTopics = [];
 
-        function loadTopicMarkdown(topicObj) {
+        const fileSelect = document.getElementById('file-select');
+        const readmeContent = document.getElementById('readme-content');
+        const topicTitle = document.getElementById('topic-title');
+
+        fetch('../../data/topics.json')
+            .then(res => res.json())
+            .then(topics => {
+                allTopics = topics;
+                fileSelect.innerHTML = topics.map(t => `
+                    <option value="${t.id}" ${t.id === currentTopicId ? 'selected' : ''}>${t.title}</option>
+                `).join('');
+
+                const active = allTopics.find(t => t.id === currentTopicId) || allTopics[0];
+                if (active) {
+                    fileSelect.value = active.id;
+                    loadMarkdown(active);
+                }
+            })
+            .catch(err => {
+                readmeContent.innerHTML = '<p>Could not load topic index.</p>';
+            });
+
+        function loadMarkdown(topicObj) {
             if (!topicObj || !topicObj.markdown_file) {
-                document.getElementById('doc-content').innerHTML = '<p>Topic documentation file not found.</p>';
+                readmeContent.innerHTML = '<p>Topic documentation file not found.</p>';
                 return;
             }
 
+            topicTitle.textContent = topicObj.title;
             document.title = `${topicObj.title} | Notes | Yosskavo`;
+
+            // Update URL without page reload
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.set('topic', topicObj.id);
+            window.history.replaceState({}, '', newUrl);
 
             fetch(topicObj.markdown_file)
                 .then(res => {
                     if (!res.ok) throw new Error('File not found');
                     return res.text();
                 })
-                .then(text => {
-                    document.getElementById('doc-content').innerHTML = marked.parse(text);
+                .then(mdText => {
+                    if (window.marked) {
+                        readmeContent.innerHTML = window.marked.parse(mdText);
+                    } else {
+                        readmeContent.innerHTML = '<pre>' + mdText + '</pre>';
+                    }
+                    attachLinkInterceptors();
                 })
                 .catch(err => {
-                    document.getElementById('doc-content').innerHTML = `<p>Error loading topic note: ${err.message}</p>`;
+                    readmeContent.innerHTML = `<p>Topic note file is not available.</p>`;
                 });
         }
 
-        fetch('../../data/topics.json')
-            .then(res => res.json())
-            .then(topics => {
-                allTopics = topics;
-                const select = document.getElementById('topic-file-select');
-
-                select.innerHTML = topics.map(t => `
-                    <option value="${t.id}" ${t.id === currentTopicId ? 'selected' : ''}>${t.title}</option>
-                `).join('');
-
-                select.addEventListener('change', (e) => {
-                    currentTopicId = e.target.value;
-                    const selected = allTopics.find(t => t.id === currentTopicId);
-                    window.history.replaceState(null, '', `?topic=${currentTopicId}`);
-                    loadTopicMarkdown(selected);
-                });
-
-                const active = allTopics.find(t => t.id === currentTopicId) || allTopics[0];
-                if (active) {
-                    select.value = active.id;
-                    loadTopicMarkdown(active);
+        function attachLinkInterceptors() {
+            const links = readmeContent.querySelectorAll('a');
+            links.forEach(a => {
+                const href = a.getAttribute('href');
+                if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+                    a.setAttribute('target', '_blank');
+                    a.setAttribute('rel', 'noopener');
                 }
-            })
-            .catch(err => {
-                document.getElementById('doc-content').innerHTML = '<p>Could not load topic index.</p>';
             });
+        }
+
+        fileSelect.addEventListener('change', (e) => {
+            currentTopicId = e.target.value;
+            const selected = allTopics.find(t => t.id === currentTopicId);
+            if (selected) {
+                loadMarkdown(selected);
+            }
+        });
     </script>
 </body>
 </html>
