@@ -658,6 +658,41 @@ h1 {
     flex-wrap: wrap;
 }
 
+.cv-stacked-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.cv-download-btn {
+    color: var(--tokyo-orange) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cv-download-btn:hover {
+    color: var(--tokyo-purple) !important;
+    text-decoration: underline;
+}
+
+.cv-view-btn {
+    color: var(--tokyo-cyan) !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cv-view-btn:hover {
+    color: var(--tokyo-blue) !important;
+    text-decoration: underline;
+}
+
 /* ========================================= */
 /* Hub Preview Block Styling                 */
 /* ========================================= */
