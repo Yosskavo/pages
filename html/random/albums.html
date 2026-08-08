@@ -21,14 +21,15 @@
     </nav>
 
     <section id="album-reviews">
-        <h2>Album Reviews</h2>
-        <p>Personal reviews, highlights, and thoughts on my favorite music albums:</p>
+        <h2>Album Reviews &amp; Highlights</h2>
+        <p>Personal reviews, ratings, and sound design highlights of albums I listen to:</p>
 
         <!-- Search & Sort Controls Bar -->
         <div class="controls-bar">
-            <input type="text" id="search-input" placeholder="Search album reviews by title, artist, or genre..." class="search-input">
+            <input type="text" id="search-input" placeholder="Search albums by title, artist, genre, or track..." class="search-input">
             <select id="sort-select" class="sort-select">
                 <option value="default">Sort: Default</option>
+                <option value="rating">Rating: Highest First</option>
                 <option value="az">Title: A to Z</option>
                 <option value="za">Title: Z to A</option>
             </select>
@@ -54,13 +55,19 @@
                 const artist = (a.artist || '').toLowerCase();
                 const genre = (a.genre || '').toLowerCase();
                 const review = (a.review || '').toLowerCase();
-                return title.includes(query) || artist.includes(query) || genre.includes(query) || review.includes(query);
+                const tracks = (a.favorite_tracks ? a.favorite_tracks.join(' ') : '').toLowerCase();
+                return title.includes(query) || artist.includes(query) || genre.includes(query) || review.includes(query) || tracks.includes(query);
             });
 
             if (sortVal === 'az') {
                 filtered.sort((a, b) => a.title.localeCompare(b.title));
             } else if (sortVal === 'za') {
                 filtered.sort((a, b) => b.title.localeCompare(a.title));
+            } else if (sortVal === 'rating') {
+                filtered.sort((a, b) => {
+                    const parseRating = r => parseFloat((r.rating || '').replace('/10', '')) || 0;
+                    return parseRating(b) - parseRating(a);
+                });
             }
 
             if (filtered.length === 0) {
@@ -69,15 +76,17 @@
             }
 
             container.innerHTML = filtered.map(album => `
-                <article class="album-card">
-                    ${album.cover ? `<img src="${album.cover}" alt="${album.title} cover" class="album-cover" loading="lazy">` : ''}
-                    <div class="album-details">
+                <article class="project-card">
+                    <div class="card-header-block">
                         <h3>${album.title}</h3>
-                        <p class="album-meta"><strong>${album.artist}</strong> • <span class="genre">${album.genre}</span></p>
-                        <p class="rating">Rating: <strong>${album.rating}</strong></p>
-                        <p class="review-text">${album.review}</p>
-                        ${album.favorite_tracks ? `<p class="tracks"><strong>Favorite Tracks:</strong> ${album.favorite_tracks.join(', ')}</p>` : ''}
+                        ${album.date ? `<div class="date-badge">${album.date}</div>` : ''}
                     </div>
+                    <p style="text-align: center;"><strong>Artist:</strong> ${album.artist} • <strong>Genre:</strong> ${album.genre}</p>
+                    <p>${album.review}</p>
+                    <ul class="card-details-list">
+                        <li><strong>Rating:</strong> <span class="rating-badge">${album.rating}</span></li>
+                        ${album.favorite_tracks ? `<li><strong>Favorite Tracks:</strong> ${album.favorite_tracks.join(', ')}</li>` : ''}
+                    </ul>
                 </article>
             `).join('');
         }

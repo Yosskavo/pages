@@ -1,24 +1,352 @@
 [
   {
-    "id": "album-1",
-    "title": "Untrue",
-    "artist": "Burial",
-    "cover": "https://upload.wikimedia.org/wikipedia/en/2/2a/Burial_-_Untrue.jpg",
-    "genre": "Dubstep / Ambient",
+    "id": "rodeo",
+    "title": "Rodeo",
+    "artist": "Travis Scott",
+    "genre": "Psychedelic Trap / Southern Hip Hop",
     "rating": "10/10",
-    "review": "A seminal masterpiece in atmospheric soundscapes, combining crackling vinyl textures, pitch-shifted vocal samples, and nocturnal garage rhythms.",
-    "favorite_tracks": ["Archangel", "Etched Headplate"],
-    "date": "2026-08-06"
+    "review": "A defining trap magnum opus. Groundbreaking cinematic arrangement, layered synthesizers, and multi-part song structures that elevated trap production into high art.",
+    "favorite_tracks": ["90210", "Nightcrawler", "Maria I'm Drunk", "Oh My Dis Side"],
+    "date": "2026-08-08"
   },
   {
-    "id": "album-2",
-    "title": "Selected Ambient Works 85-92",
-    "artist": "Aphex Twin",
-    "cover": "https://upload.wikimedia.org/wikipedia/en/d/d4/Aphex_Twin_-_Selected_Ambient_Works_85-92.jpg",
-    "genre": "IDM / Ambient Techno",
+    "id": "astroworld",
+    "title": "ASTROWORLD",
+    "artist": "Travis Scott",
+    "genre": "Psychedelic Trap",
     "rating": "9.5/10",
-    "review": "Timeless electronic music crafted with home-built synths. Lush pads and hypnotic drum patterns that laid the foundation for modern IDM.",
-    "favorite_tracks": ["Xtal", "Heliosphan"],
-    "date": "2026-08-06"
+    "review": "An immersive amusement park of psychedelic soundscapes, seamless beat switches, and lush atmospheric mixing that defined late 2010s hip hop.",
+    "favorite_tracks": ["SICKO MODE", "STARGAZING", "SKELETONS", "HOUSTONFORNICATION"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "days-before-rodeo",
+    "title": "Days Before Rodeo",
+    "artist": "Travis Scott",
+    "genre": "Dark Trap / Cloud Rap",
+    "rating": "9.5/10",
+    "review": "The raw turning point for Travis Scott's sound. Gritty basslines, anthemic hooks, and iconic experimental mixing from Mike Dean and Metro Boomin.",
+    "favorite_tracks": ["Drugs You Should Try It", "Mamacita", "The Prayer", "Skyfall"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "birds-in-the-trap",
+    "title": "Birds in the Trap Sing McKnight",
+    "artist": "Travis Scott",
+    "genre": "Atmospheric Trap",
+    "rating": "9/10",
+    "review": "Dark, nocturnal, and focused on pure vibe and melodic flow. Concise tracklist packed with hypnotic bass grooves and top-tier guest performances.",
+    "favorite_tracks": ["goosebumps", "pick up the phone", "through the late night", "coordinate"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "utopia",
+    "title": "UTOPIA",
+    "artist": "Travis Scott",
+    "genre": "Industrial Trap / Experimental Hip Hop",
+    "rating": "9.5/10",
+    "review": "Aggressive, textured, and heavily influenced by industrial drum patterns and vintage analog synthesizers. A bold evolution in modern sound design.",
+    "favorite_tracks": ["MY EYES", "HYAENA", "TELEKINESIS", "SIRENS"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "whole-lotta-red",
+    "title": "Whole Lotta Red",
+    "artist": "Playboi Carti",
+    "genre": "Rage / Punk Trap",
+    "rating": "9.5/10",
+    "review": "A radical genre-shifting sonic statement. Overdriven synth leads, hyper-energetic vocal delivery, and filthy 808s that spawned an entire generation of underground rage music.",
+    "favorite_tracks": ["Stop Breathing", "Rockstar Made", "Sky", "ILoveUIHateU"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "die-lit",
+    "title": "Die Lit",
+    "artist": "Playboi Carti",
+    "genre": "Cloud Trap / Minimalist Trap",
+    "rating": "9.5/10",
+    "review": "Peak Pierre Bourne production paired with infectious ad-libs and bouncy basslines. A masterclass in rhythmic repetition and hypnotic spatial mixing.",
+    "favorite_tracks": ["Long Time - Intro", "Shoota", "R.I.P.", "FlatBed Freestyle"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "playboi-carti",
+    "title": "Playboi Carti",
+    "artist": "Playboi Carti",
+    "genre": "Cloud Rap / Pluggnb",
+    "rating": "9/10",
+    "review": "The self-titled tape that solidified the breezy, dreamlike cloud rap sound with timeless anthems and clean, minimalist synth loops.",
+    "favorite_tracks": ["Location", "Magnolia", "wokeuplikethis*", "Kelly K"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "hardstone-psycho",
+    "title": "HARDSTONE PSYCHO",
+    "artist": "Don Toliver",
+    "genre": "Psychedelic Rock / Melodic Trap",
+    "rating": "9.5/10",
+    "review": "Heavy biker-aesthetic fusion blending distorted electric guitars, 808 trap rhythms, and infectious vocal harmonies across four distinct themed disks.",
+    "favorite_tracks": ["BANDIT", "TORE UP", "KOREAN BBQ", "BROTHER STONE"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "heaven-or-hell",
+    "title": "Heaven or Hell",
+    "artist": "Don Toliver",
+    "genre": "Melodic Trap / Contemporary R&B",
+    "rating": "9/10",
+    "review": "Polished, smooth vocal execution and spacey reverb-drenched beats that established Don Toliver as one of the best melodic voices in modern hip hop.",
+    "favorite_tracks": ["No Idea", "After Party", "Cardigan", "Can't Feel My Legs"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "life-of-a-don",
+    "title": "Life of a DON",
+    "artist": "Don Toliver",
+    "genre": "Smooth R&B / Trap",
+    "rating": "9/10",
+    "review": "Lush late-night grooves with intricate acoustic guitars, velvety vocal layering, and crisp Mike Dean synthesizer finishes.",
+    "favorite_tracks": ["Way Bigger", "Flocky Flocky", "Outerspace", "Swiggin"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "love-sick",
+    "title": "Love Sick",
+    "artist": "Don Toliver",
+    "genre": "Retro Disco / Melodic Trap",
+    "rating": "8.8/10",
+    "review": "A 1970s futuristic diner concept exploring themes of romance and nocturnal ambition over bouncy funk-inspired trap grooves.",
+    "favorite_tracks": ["Private Landing", "Slow Motion", "Bus Stop", "Time Heals All"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "heroes-and-villains",
+    "title": "HEROES & VILLAINS",
+    "artist": "Metro Boomin",
+    "genre": "Cinematic Dark Trap",
+    "rating": "9.5/10",
+    "review": "Seamless orchestral transitions, movie-score sampling, and heavyweight features. Metro Boomin's most cohesive producer album to date.",
+    "favorite_tracks": ["Superhero (Heroes & Villains)", "Creepin'", "Too Many Nights", "Trance"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "not-all-heroes-wear-capes",
+    "title": "NOT ALL HEROES WEAR CAPES",
+    "artist": "Metro Boomin",
+    "genre": "Orchestral Trap",
+    "rating": "9.3/10",
+    "review": "The blueprint for the modern blockbuster producer tape. Clean percussion, dynamic bass mixing, and anthemic hooks throughout.",
+    "favorite_tracks": ["Space Cadet", "Don't Come Out The House", "10 Freaky Girls", "Up to Something"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "without-warning",
+    "title": "Without Warning",
+    "artist": "21 Savage, Offset, Metro Boomin",
+    "genre": "Horrorcore / Dark Trap",
+    "rating": "9.5/10",
+    "review": "A surprise Halloween masterpiece. Eerie horror synths, merciless verses, and relentless 808 percussion from start to finish.",
+    "favorite_tracks": ["Ghostface Killers", "Ric Flair Drip", "Rap Saved Me", "My Choppa Hate Niggas"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "we-dont-trust-you",
+    "title": "WE DON'T TRUST YOU",
+    "artist": "Future & Metro Boomin",
+    "genre": "Atlanta Trap",
+    "rating": "9.2/10",
+    "review": "The iconic duo reunites for unadulterated Atlanta trap perfection. Crisp snare rolls, brass horns, and legendary collaborative chemistry.",
+    "favorite_tracks": ["Like That", "Type Shit", "Young Metro", "Cinderella"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "we-still-dont-trust-you",
+    "title": "WE STILL DON'T TRUST YOU",
+    "artist": "Future & Metro Boomin",
+    "genre": "Synthwave / Melodic Trap / R&B",
+    "rating": "9.0/10",
+    "review": "A moody, synth-heavy double LP exploring 80s electronic aesthetics, smooth melodies, and introspective trap ballads.",
+    "favorite_tracks": ["WE STILL DON'T TRUST YOU", "Out of My Hands", "Show of Hands", "Red Leather"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "jackboys",
+    "title": "JACKBOYS",
+    "artist": "Cactus Jack",
+    "genre": "Trap / Collective Hip Hop",
+    "rating": "9.0/10",
+    "review": "Short, energetic compilation showcasing the versatility of Cactus Jack signees with raw automotive vibes and punchy bass.",
+    "favorite_tracks": ["GANG GANG", "OUT WEST", "WHAT TO DO?", "GATTI"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "jackboys-2",
+    "title": "JACKBOYS 2",
+    "artist": "Cactus Jack",
+    "genre": "Trap / Collective Hip Hop",
+    "rating": "8.9/10",
+    "review": "The upcoming next installment in the Cactus Jack saga, continuing high-octane collaborative trap aesthetics.",
+    "favorite_tracks": ["Projected Lead Single", "Collective Anthem"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "huncho-jack",
+    "title": "Huncho Jack, Jack Huncho",
+    "artist": "Travis Scott & Quavo",
+    "genre": "Melodic Trap",
+    "rating": "8.8/10",
+    "review": "A collaborative joyride featuring fast-paced trading verses, luxury trap keys, and artwork illustrated by Ralph Steadman.",
+    "favorite_tracks": ["Saint", "Black & Chinese", "Modern Slavery", "Dubai Shit"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "bully",
+    "title": "BULLY",
+    "artist": "Kanye West",
+    "genre": "Experimental / Conceptual Hip Hop",
+    "rating": "9.2/10",
+    "review": "Introspective and focused conceptual exploration returning to signature raw sample chopping and unfiltered vocal emotion.",
+    "favorite_tracks": ["Preacher Man", "Beauty and the Beast"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "vultures-1",
+    "title": "VULTURES 1",
+    "artist": "¥$ (Kanye West & Ty Dolla $ign)",
+    "genre": "Industrial Hip Hop / Collaborative Trap",
+    "rating": "8.9/10",
+    "review": "Hard-hitting choral arrangements, heavy European club influences, and infectious harmonies from Ty Dolla $ign.",
+    "favorite_tracks": ["CARNIVAL", "BURN", "STARS", "DO IT"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "vultures-2",
+    "title": "VULTURES 2",
+    "artist": "¥$ (Kanye West & Ty Dolla $ign)",
+    "genre": "Experimental Trap / R&B",
+    "rating": "8.7/10",
+    "review": "Atmospheric, eclectic sequel expanding on acoustic basslines, ambient interludes, and raw vocal performances.",
+    "favorite_tracks": ["SLIDE", "FIELD TRIP", "RIVER", "PROMOTION"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "yeat-2093",
+    "title": "2093",
+    "artist": "Yeat",
+    "genre": "Dystopian Cyberpunk / Industrial Trap",
+    "rating": "9.5/10",
+    "review": "A massive creative leap into futuristic dystopian cinema. Heavy bass synthesis, orchestral brass, and cinematic vocal layering.",
+    "favorite_tracks": ["ILUV", "Breathe", "Bought The Earth", "Power Trip", "Familia"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "yeat-up-to-me",
+    "title": "Up 2 Më",
+    "artist": "Yeat",
+    "genre": "Rage / Electronic Trap",
+    "rating": "9.5/10",
+    "review": "The breakthrough tape that defined modern underground synth trap. Non-stop infectious flows, creative slang, and unmatched bass grooves.",
+    "favorite_tracks": ["Monëy so big", "Get Busy", "Ya Ya", "Turban", "Twizzy Rich"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "yeat-afterlyfe",
+    "title": "AfterLyfe",
+    "artist": "Yeat",
+    "genre": "Experimental Rage / Minimalist Trap",
+    "rating": "9.0/10",
+    "review": "Dark, whispery vocal inflections paired with eerie, stripped-back synth textures and hypnotic percussion.",
+    "favorite_tracks": ["No morë talk", "Nun id change", "Split", "Mysëlf"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "yeat-lyfestyle",
+    "title": "Lyfestyle",
+    "artist": "Yeat",
+    "genre": "Heavy 808s / Dark Club Trap",
+    "rating": "9.2/10",
+    "review": "Return to aggressive speaker-knocking bass, raw delivery, and high-tempo club energy.",
+    "favorite_tracks": ["Geek Party", "Heavy Stunt", "Lyfestyle Anthem"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "yeat-adl",
+    "title": "A Dangerous Lyfe (ADL)",
+    "artist": "Yeat",
+    "genre": "Futuristic Cyber Trap",
+    "rating": "9.1/10",
+    "review": "Further pushing the futuristic sound palette with complex vocal layering and industrial low-end frequencies.",
+    "favorite_tracks": ["Dangerous Horizon", "Cyber Flow"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "igor",
+    "title": "IGOR",
+    "artist": "Tyler, The Creator",
+    "genre": "Neo-Soul / Synth-Funk / Hip Hop",
+    "rating": "9.8/10",
+    "review": "A masterclass in narrative songwriting and analog synth distortion. Heartfelt, emotional, and meticulously produced from start to finish.",
+    "favorite_tracks": ["EARFQUAKE", "NEW MAGIC WAND", "GONE, GONE / THANK YOU", "A BOY IS A GUN*"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "damn",
+    "title": "DAMN.",
+    "artist": "Kendrick Lamar",
+    "genre": "Conscious Hip Hop / West Coast Rap",
+    "rating": "9.7/10",
+    "review": "Pulitzer Prize-winning masterpiece exploring duality, wickedness, and weakness through razor-sharp lyricism and versatile production.",
+    "favorite_tracks": ["DNA.", "HUMBLE.", "FEAR.", "DUCKWORTH."],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "mr-morale",
+    "title": "Mr. Morale & the Big Steppers",
+    "artist": "Kendrick Lamar",
+    "genre": "Therapeutic Jazz Rap / Experimental",
+    "rating": "9.4/10",
+    "review": "An intensely vulnerable, theatrical double album deconstructing generational trauma, family dynamics, and artistic maturity with live piano accompaniment.",
+    "favorite_tracks": ["N95", "Father Time", "United In Grief", "Savior"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "dont-be-dumb",
+    "title": "Don't Be Dumb",
+    "artist": "A$AP Rocky",
+    "genre": "German Expressionism / Psychedelic Hip Hop",
+    "rating": "9.3/10",
+    "review": "Artistic exploration of grim, atmospheric soundscapes with heavy percussion, intricate sampling, and Harlem flow.",
+    "favorite_tracks": ["Tailor Swif", "Highjack", "Ruby Rosary"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "who-really-cares",
+    "title": "Who Really Cares",
+    "artist": "TV Girl",
+    "genre": "Indie Pop / Sampledelia",
+    "rating": "9.2/10",
+    "review": "Crisp 1960s pop sampling combined with breezy hip-hop drum loops and melancholic, witty lyricism about modern detachment.",
+    "favorite_tracks": ["Not Allowed", "Cigarettes out the Window", "Lovers Rock", "Taking What's Not Yours"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "i-love-you",
+    "title": "I Love You.",
+    "artist": "The Neighbourhood",
+    "genre": "Dark Alt-Pop / Indie Rock",
+    "rating": "9.0/10",
+    "review": "Moody monochrome aesthetics blending indie guitar reverb with rolling hip-hop hi-hats and haunting hooks.",
+    "favorite_tracks": ["Sweater Weather", "Afraid", "Female Robbery", "Wires"],
+    "date": "2026-08-08"
+  },
+  {
+    "id": "project-yvl",
+    "title": "Project YVL",
+    "artist": "TWNX",
+    "genre": "Underground Trap / Pluggnb",
+    "rating": "8.8/10",
+    "review": "Fast-paced underground internet-era trap featuring sharp synth arpeggios, dynamic ad-lib layering, and high-energy 808 slides.",
+    "favorite_tracks": ["YVL Anthem", "No Sleep", "Night Run"],
+    "date": "2026-08-08"
   }
 ]
