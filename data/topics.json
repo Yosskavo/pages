@@ -1,18 +1,29 @@
 [
   {
-    "id": "topic-1",
+    "id": "unix-processes-signals",
     "title": "Unix Processes & Signals",
     "category": "Systems",
     "summary": "Notes on process creation (fork), binary execution (execve), IPC pipelines, and handling asynchronous Unix signals in C.",
-    "tags": ["C", "Unix", "Processes"],
+    "tags": ["C", "Unix", "Processes", "Signals"],
+    "markdown_file": "../../topics_markdown/unix-processes-signals.md",
     "date": "2026-08-06"
   },
   {
-    "id": "topic-2",
+    "id": "container-isolation-mechanics",
     "title": "Container Isolation Mechanics",
     "category": "DevOps",
     "summary": "Exploring Linux namespaces, cgroups, chroot, and how Docker wraps kernel features to isolate multi-service web stacks.",
-    "tags": ["Docker", "Linux", "Containers"],
+    "tags": ["Docker", "Linux", "Containers", "DevOps"],
+    "markdown_file": "../../topics_markdown/container-isolation-mechanics.md",
     "date": "2026-08-06"
+  },
+  {
+    "id": "io-multiplexing-sockets",
+    "title": "Sockets & I/O Multiplexing",
+    "category": "Networking",
+    "summary": "Exploration of non-blocking networking models and building scalable HTTP/1.1 servers using select, poll, and epoll in C/C++.",
+    "tags": ["C++", "Networking", "Sockets", "HTTP"],
+    "markdown_file": "../../topics_markdown/io-multiplexing-sockets.md",
+    "date": "2026-08-07"
   }
 ]

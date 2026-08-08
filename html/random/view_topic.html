@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic Notes Viewer | Yosskavo</title>
+	<link rel="icon" type="image/svg+xml" href="../../icons/favicon.svg">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects/projects.html">Projects</a></li>
+                <li><a href="random.html" class="active">Random</a></li>
+                <li><a href="../contact/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="viewer-top-bar">
+        <div class="viewer-selector-group">
+            <label for="topic-file-select" class="viewer-label">Topic Note:</label>
+            <select id="topic-file-select" class="viewer-select"></select>
+        </div>
+        <a href="topics.html" class="viewer-back-link">&larr; Back to Topics</a>
+    </div>
+
+    <section id="doc-viewer-container" class="doc-viewer-container">
+        <div id="doc-content" class="markdown-body">
+            <p>Loading topic notes...</p>
+        </div>
+    </section>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentTopicId = urlParams.get('topic') || 'unix-processes-signals';
+        let allTopics = [];
+
+        function loadTopicMarkdown(topicObj) {
+            if (!topicObj || !topicObj.markdown_file) {
+                document.getElementById('doc-content').innerHTML = '<p>Topic documentation file not found.</p>';
+                return;
+            }
+
+            document.title = `${topicObj.title} | Notes | Yosskavo`;
+
+            fetch(topicObj.markdown_file)
+                .then(res => {
+                    if (!res.ok) throw new Error('File not found');
+                    return res.text();
+                })
+                .then(text => {
+                    document.getElementById('doc-content').innerHTML = marked.parse(text);
+                })
+                .catch(err => {
+                    document.getElementById('doc-content').innerHTML = `<p>Error loading topic note: ${err.message}</p>`;
+                });
+        }
+
+        fetch('../../data/topics.json')
+            .then(res => res.json())
+            .then(topics => {
+                allTopics = topics;
+                const select = document.getElementById('topic-file-select');
+
+                select.innerHTML = topics.map(t => `
+                    <option value="${t.id}" ${t.id === currentTopicId ? 'selected' : ''}>${t.title}</option>
+                `).join('');
+
+                select.addEventListener('change', (e) => {
+                    currentTopicId = e.target.value;
+                    const selected = allTopics.find(t => t.id === currentTopicId);
+                    window.history.replaceState(null, '', `?topic=${currentTopicId}`);
+                    loadTopicMarkdown(selected);
+                });
+
+                const active = allTopics.find(t => t.id === currentTopicId) || allTopics[0];
+                if (active) {
+                    select.value = active.id;
+                    loadTopicMarkdown(active);
+                }
+            })
+            .catch(err => {
+                document.getElementById('doc-content').innerHTML = '<p>Could not load topic index.</p>';
+            });
+    </script>
+</body>
+</html>
