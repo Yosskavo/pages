@@ -83,7 +83,7 @@
 
             container.innerHTML = filtered.map(album => `
                 <article class="album-card">
-                    ${album.cover ? `<img src="${album.cover}" alt="${album.title} cover" class="album-cover" loading="lazy" onerror="this.style.display='none'">` : ''}
+                    ${album.cover ? `<img src="${album.cover}" alt="${album.title} cover" class="album-cover" loading="lazy" referrerpolicy="no-referrer">` : ''}
                     <div class="album-details">
                         <div class="card-header-block">
                             <h3>${album.title}</h3>
