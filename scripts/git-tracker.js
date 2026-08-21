@@ -105,10 +105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             lastRepoEl.innerHTML = `
                 <ul style="list-style-type: none; padding-left: 10px; margin: 5px 0;">
-                    <li>- the platform : ${stats.lastRepo.source}</li>
-                    <li>- the repo &nbsp;&nbsp;&nbsp;&nbsp;: <a href="${stats.lastRepo.html_url}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">${stats.lastRepo.name}</a></li>
-                    <li>- the commit &nbsp;&nbsp;: <code style="font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 4px;">${commitMsg}</code></li>
-                    <li>- the date &nbsp;&nbsp;&nbsp;&nbsp;: ${stats.lastRepo.updated.toLocaleDateString()}</li>
+                    <li style="margin-bottom: 5px;"><span style="color: #4CAF50;">- the platform</span> : <span style="color: orange;">${stats.lastRepo.source}</span></li>
+                    <li style="margin-bottom: 5px; display: flex; align-items: center; flex-wrap: nowrap;"><span style="color: #4CAF50; white-space: pre;">- the repo     </span> : <a href="${stats.lastRepo.html_url}" target="_blank" style="color: orange; text-decoration: underline; display: inline-block; margin-left: 5px;">${stats.lastRepo.name}</a></li>
+                    <li style="margin-bottom: 5px; display: flex; align-items: center; flex-wrap: nowrap;"><span style="color: #4CAF50; white-space: pre;">- the commit   </span> : <code style="color: orange; font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 4px; margin-left: 5px; display: inline-block;">${commitMsg}</code></li>
+                    <li style="margin-bottom: 5px;"><span style="color: #4CAF50; white-space: pre;">- the date     </span> : <span style="color: orange;">${stats.lastRepo.updated.toLocaleDateString()}</span></li>
                 </ul>
             `;
         }
