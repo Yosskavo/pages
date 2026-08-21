@@ -103,7 +103,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             } catch (e) { console.warn('Could not fetch last commit message'); }
 
-            lastRepoEl.innerHTML = `<span class="repo-badge">[${stats.lastRepo.source}]</span> <a href="${stats.lastRepo.html_url}" target="_blank" style="color: inherit; text-decoration: underline;"><strong>${stats.lastRepo.name}</strong></a><br><code style="font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 4px; display: inline-block; margin-top: 5px;">${commitMsg}</code> <span style="font-size: 0.8em; opacity: 0.8;">(${stats.lastRepo.updated.toLocaleDateString()})</span>`;
+            lastRepoEl.innerHTML = `
+                <ul style="list-style-type: none; padding-left: 10px; margin: 5px 0;">
+                    <li>- the platform : ${stats.lastRepo.source}</li>
+                    <li>- the repo &nbsp;&nbsp;&nbsp;&nbsp;: <a href="${stats.lastRepo.html_url}" target="_blank" style="color: var(--primary-color); text-decoration: underline;">${stats.lastRepo.name}</a></li>
+                    <li>- the commit &nbsp;&nbsp;: <code style="font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 4px;">${commitMsg}</code></li>
+                    <li>- the date &nbsp;&nbsp;&nbsp;&nbsp;: ${stats.lastRepo.updated.toLocaleDateString()}</li>
+                </ul>
+            `;
         }
 
         // 5. Build the Monthly Commits Chart using GitHub Events API
