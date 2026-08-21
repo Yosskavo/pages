@@ -86,16 +86,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const lastRepoEl = document.getElementById('git-latest-commit');
         if (stats.lastRepo) {
-            lastRepoEl.innerHTML = `<span class="repo-badge">[${stats.lastRepo.source}]</span> <a href="${stats.lastRepo.html_url}" target="_blank" style="color: inherit; text-decoration: underline;"><strong>${stats.lastRepo.name}</strong></a> updated on ${stats.lastRepo.updated.toLocaleDateString()}`;
-        }
+            let commitMsg = "Updated repository";
+            try {
+                if (stats.lastRepo.source === 'GitHub') {
+                    const commitRes = await fetch(`https://api.github.com/repos/${githubUser}/${stats.lastRepo.name}/commits?per_page=1`);
+                    if (commitRes.ok) {
+                        const commits = await commitRes.json();
+                        if (commits.length > 0) commitMsg = commits[0].commit.message.split('\n')[0];
+                    }
+                } else if (stats.lastRepo.source === 'Codeberg') {
+                    const commitRes = await fetch(`https://codeberg.org/api/v1/repos/${codebergUser}/${stats.lastRepo.name}/commits?limit=1`);
+                    if (commitRes.ok) {
+                        const commits = await commitRes.json();
+                        if (commits.length > 0) commitMsg = commits[0].commit.message.split('\n')[0];
+                    }
+                }
+            } catch (e) { console.warn('Could not fetch last commit message'); }
 
-        const forksEl = document.getElementById('git-forks-list');
-        if (forksEl) {
-            if (stats.forks.length > 0) {
-                forksEl.innerHTML = stats.forks.map(f => `<li><a href="${f.html_url}" target="_blank" style="color:var(--primary-color);">${f.name}</a> <small>(${f.source})</small></li>`).join('');
-            } else {
-                forksEl.innerHTML = '<li>No forks found.</li>';
-            }
+            lastRepoEl.innerHTML = `<span class="repo-badge">[${stats.lastRepo.source}]</span> <a href="${stats.lastRepo.html_url}" target="_blank" style="color: inherit; text-decoration: underline;"><strong>${stats.lastRepo.name}</strong></a><br><code style="font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 4px; display: inline-block; margin-top: 5px;">${commitMsg}</code> <span style="font-size: 0.8em; opacity: 0.8;">(${stats.lastRepo.updated.toLocaleDateString()})</span>`;
         }
 
         // 5. Build the Monthly Commits Chart using GitHub Events API
